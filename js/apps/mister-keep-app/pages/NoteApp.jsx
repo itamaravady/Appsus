@@ -15,7 +15,7 @@ export class NoteApp extends React.Component {
         this.loadNotes();
     }
 
-    loadNotes() {
+    loadNotes = () => {
         const { filterBy } = this.state;
         noteService.waitQuery(filterBy)
             // noteService.query(filterBy)
@@ -42,7 +42,7 @@ export class NoteApp extends React.Component {
             <section>
                 {/* <noteAdd history={this.props.history} /> */}
                 {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
-                {!notesToShow ? <Loader /> : <NoteList notes={notesToShow} />}
+                {!notesToShow ? <Loader /> : <NoteList loadNotes={this.loadNotes} notes={notesToShow} />}
 
 
             </section>

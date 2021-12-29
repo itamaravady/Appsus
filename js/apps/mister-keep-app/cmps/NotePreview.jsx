@@ -1,4 +1,6 @@
 import { TodosPreview } from './TodosPreview.jsx'
+import { noteService } from '../services/note.service.js'
+import { NoteMenu } from './NoteMenu.jsx'
 
 const { Link } = ReactRouterDOM;
 
@@ -6,17 +8,28 @@ export class NotePreview extends React.Component {
     state = {
         note: this.props.note,
         classes: null,
+        menuClasses: null,
     }
 
+    onRemove = () => {
+        noteService.removeNote(this.state.note.id)
+            .then(() => {
+                this.props.loadNotes();
+            });
+    }
 
     render() {
-        const { note, classes } = this.state
+        const { note, classes, menuClasses } = this.state
         const noteForDisplay = _getNoteForDesplay(note);
         return (
 
             <article className={`note-preview-container ${classes}`} >
                 {noteForDisplay}
-                buttons
+                <NoteMenu
+                    className={`note-menu ${menuClasses}`}
+                    note={note}
+                    onRemove={this.onRemove}
+                />
             </article >
 
         )
