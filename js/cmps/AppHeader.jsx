@@ -16,11 +16,11 @@ export class AppHeader extends React.Component {
         const { classes } = this.state;
         return (
             <section className="app-header">
-                <header className="main-header">
-                    <h1>Appsus</h1>
+                <header className="main-header ">
+                    <h1 className="seconday-header">Appsus</h1>
+                    <button onClick={this.toggleMenu}>H</button>
+                    {classes && <HamburgerMenu classes={classes} />}
                 </header>
-                <button onClick={this.toggleMenu}>H</button>
-                {classes && <HamburgerMenu classes={classes} />}
             </section>
         )
     }

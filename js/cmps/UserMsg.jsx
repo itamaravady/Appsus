@@ -11,6 +11,7 @@ export class UserMsg extends React.Component {
     componentDidMount() {
 
         this.removeEventBus = eventBusService.on('user-msg', (msg) => {
+            console.log(msg);
             this.setState({ msg }, this.onAutoClose);
         })
     }
@@ -38,7 +39,7 @@ export class UserMsg extends React.Component {
         return (
             <div className="user-msg" >
                 <h3>{msg.txt}</h3>
-                <a href={`/#/book/${msg.book.id}`}> Check it Out</a>
+                {msg.name === 'book' && < a href={`/#/book/${msg.type.id}`}> Check it Out</a>}
             </div>
         )
 

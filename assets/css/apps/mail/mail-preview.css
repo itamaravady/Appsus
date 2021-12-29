@@ -1,0 +1,28 @@
+.list-info-mail {
+  background-color: white;
+  height: 50px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  box-shadow: 3px 0px 1px 0px black;
+  align-items: center;
+}
+.list-info-mail li:not(:nth-child(2)) {
+  font-weight: bold;
+}
+
+.list-info-mail li:nth-child(2) {
+  color: rgb(131, 128, 128);
+}
+
+.list-info-mail:hover {
+  background-color: rgb(215, 220, 223);
+  box-shadow: 3px 0px 5px 0px black;
+}
+
+.body-title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
