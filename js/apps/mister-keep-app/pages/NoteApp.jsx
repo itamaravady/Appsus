@@ -2,6 +2,7 @@ import { noteService } from '../services/note.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { NoteAdd } from '../cmps/NoteAdd.jsx'
+import { NoteEdit } from '../cmps/NoteEdit.jsx'
 import { Loader } from '../../../cmps/Loader.jsx'
 
 export class NoteApp extends React.Component {
@@ -9,6 +10,7 @@ export class NoteApp extends React.Component {
     state = {
         notes: null,
         filterBy: null,
+        selectedNote: null,
     }
 
     componentDidMount() {
@@ -28,21 +30,29 @@ export class NoteApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
-    // onSelectNote = (note) => {
-    //     this.setState({ selectedNote: note })
-    // }
+    onSelectNote = (note) => {
+        console.log('onSelectNote', note);
+        this.setState({ selectedNote: note })
+    }
 
-    // onUnSelectNote = () => {
-    //     this.setState({ selectedNote: null })
-    // }
+    onUnSelectNote = () => {
+        this.setState({ selectedNote: null })
+    }
 
     render() {
-        const notesToShow = this.state.notes;
+        const { notes, selectedNote } = this.state;
         return (
             <section>
                 <NoteAdd loadNotes={this.loadNotes} />
                 {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
-                {!notesToShow ? <Loader /> : <NoteList loadNotes={this.loadNotes} notes={notesToShow} />}
+                {!notes ? <Loader /> :
+                    <NoteList
+                        loadNotes={this.loadNotes}
+                        notes={notes}
+                        onSelectNote={this.onSelectNote}
+                    />
+                }
+                {selectedNote && <NoteEdit />}
 
 
             </section>

@@ -1,6 +1,8 @@
 export function NoteMenu(props) {
-    const { note, onRemove } = props
+    const { note, onRemove, classes } = props
     return (
-        <button onClick={onRemove}>X</button>
+        <div className={classes}>
+            <button onClick={onRemove}>X</button>
+        </div>
     )
 }

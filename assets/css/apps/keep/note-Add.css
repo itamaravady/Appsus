@@ -9,6 +9,7 @@
     max-width: 700px;
     border-radius: 8px;
     box-shadow: 0 2px 5px 1px #a9a9a9;
+    min-width: 350px;
 }
 
 .note-add form {

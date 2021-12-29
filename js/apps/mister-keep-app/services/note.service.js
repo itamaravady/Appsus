@@ -135,11 +135,12 @@ function addNote(inputText, noteType) {
             info = {
                 videoUrl: inputText,
             }
-        case 'todos': inputText.split(',').map(todo => ({ txt: todo }))
-            var todos =
-                info = {
-                    todos
-                }
+        case 'todos':
+            var todos = inputText.split(',').map(todo => ({ txt: todo }))
+            info = {
+                title: 'New list',
+                todos,
+            }
             break;
     }
     console.log(inputText.split(','));

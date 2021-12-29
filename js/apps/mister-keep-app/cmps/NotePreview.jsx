@@ -8,7 +8,7 @@ export class NotePreview extends React.Component {
     state = {
         note: this.props.note,
         classes: null,
-        menuClasses: null,
+        isMenuHover: false,
     }
 
     onRemove = () => {
@@ -18,16 +18,26 @@ export class NotePreview extends React.Component {
             });
     }
 
+    toggleMenuBtns = () => {
+        this.setState({ isMenuHover: !this.state.isMenuHover })
+    }
+
     render() {
-        const { note, classes, menuClasses } = this.state
+        const { note, classes, isMenuHover } = this.state;
+        const { onSelectNote } = this.props;
         const noteForDisplay = _getNoteForDesplay(note);
         return (
 
-            <article className={`note-preview-container ${classes}`} >
+            <article
+                className={`note-preview-container ${classes}`}
+                onMouseEnter={this.toggleMenuBtns}
+                onMouseLeave={this.toggleMenuBtns}
+                onClick={() => onSelectNote(note)}
+            >
                 {noteForDisplay}
                 <NoteMenu
-                    className={`note-menu ${menuClasses}`}
-                    note={note}
+                    classes={`note-menu ${isMenuHover && 'open'}`}
+                    note={note}//?
                     onRemove={this.onRemove}
                 />
             </article >
