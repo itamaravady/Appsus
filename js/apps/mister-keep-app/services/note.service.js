@@ -5,6 +5,7 @@ export const noteService = {
     waitQuery,
     query,
     removeNote,
+    addNote,
     // getBookById,
     // addReview,
     // searchBooks,
@@ -114,6 +115,48 @@ function waitQuery(filterBy = null) {
     });
 }
 
+function addNote(inputText, noteType) {
+    var notes = _loadNotesFromStorage();
+
+    var info;
+    switch (noteType) {
+        case 'txt':
+            info = {
+                title: 'title',
+                txt: inputText,
+            }
+            break;
+        case 'img':
+            info = {
+                imgUrl: inputText,
+            }
+            break;
+        case 'video':
+            info = {
+                videoUrl: inputText,
+            }
+        case 'todos': inputText.split(',').map(todo => ({ txt: todo }))
+            var todos =
+                info = {
+                    todos
+                }
+            break;
+    }
+    console.log(inputText.split(','));
+    const note = {
+        id: utilService.makeId(),
+        type: noteType,
+        isPinned: false,
+        info,
+        style: {
+            backgroundColor: '#fff',
+            font: 'ariel',
+        },
+    }
+    notes.push(note);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
 
 function removeNote(noteId) {
     var notes = _loadNotesFromStorage();

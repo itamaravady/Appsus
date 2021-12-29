@@ -40,7 +40,7 @@ export class NoteApp extends React.Component {
         const notesToShow = this.state.notes;
         return (
             <section>
-                {/* <noteAdd history={this.props.history} /> */}
+                <NoteAdd loadNotes={this.loadNotes} />
                 {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
                 {!notesToShow ? <Loader /> : <NoteList loadNotes={this.loadNotes} notes={notesToShow} />}
 
