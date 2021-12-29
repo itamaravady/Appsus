@@ -1,0 +1,30 @@
+.main-layout {
+    width: 200px;
+    margin: auto;
+  }
+  
+  @media screen and (min-width: 450px) {
+    .main-layout {
+      width: 350px;
+    }
+  }
+  @media screen and (min-width: 680px) {
+    .main-layout {
+      width: 600px;
+    }
+  }
+  @media screen and (min-width: 880px) {
+    .main-layout {
+      width: 800px;
+    }
+  }
+  @media screen and (min-width: 1120px) {
+    .main-layout {
+      width: 1092px;
+    }
+  }
+  @media screen and (min-width: 1350px) {
+    .main-layout {
+      width: 1200px;
+    }
+  }

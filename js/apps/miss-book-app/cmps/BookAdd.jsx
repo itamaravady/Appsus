@@ -51,7 +51,7 @@ export class BookAdd extends React.Component {
         bookService.addGoogleBook(book)
             .then(() => {
                 console.log(book);
-                eventBusService.emit('user-msg', { txt: `Book ${book.title} was successfully added`, book })
+                eventBusService.emit('user-msg', { txt: `Book ${book.title} was successfully added`, type: book, name: 'book' })
                 this.setState({ books: null })
             });
         // .then(bookId => console.log(this.props));

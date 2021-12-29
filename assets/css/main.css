@@ -5,6 +5,7 @@
 @import './cmps/hamburger-menu.css';
 @import './cmps/loader.css';
 @import './cmps/user-msg.css';
+@import './parts/media-query.css';
 
 /* BOOKS */
 @import './apps/book/book-preview.css';
@@ -16,6 +17,9 @@
 @import './apps/book/book-add.css';
 
 /* MAIL */
+@import './apps/mail/mail-preview.css';
+@import './apps/mail/mail-details.css';
+@import './apps/mail/mail-app.css';
 
 
 

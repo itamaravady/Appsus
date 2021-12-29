@@ -1,18 +1,17 @@
-.app-header {
+
+.app-header{
+    background-color: #F2E8CF;
+}
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 10vh;
-    background-color: #F2E8CF;
     color: #1d1d1d;
-    margin-block-end: 20px;
-
 }
 
 .app-header h1 {
     text-decoration: overline;
-    margin-inline-start: 50px;
-
 }
 
 .app-header .nav-links a.active {

@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #A7C957;
+    background-color:rgb(213, 213, 214);
+    overflow-x: hidden;
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
