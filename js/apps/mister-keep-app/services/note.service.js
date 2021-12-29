@@ -4,6 +4,8 @@ import { utilService } from '../../../services/util.service.js'
 export const noteService = {
     waitQuery,
     query,
+    removeNote,
+    addNote,
     // getBookById,
     // addReview,
     // searchBooks,
@@ -12,8 +14,6 @@ export const noteService = {
 
 const KEY = 'noteDB';
 _createNotes();
-
-
 
 
 function _createNotes() {
@@ -73,6 +73,22 @@ function _createNotes() {
                     font: 'impact',
                 }
             },
+            {
+                id: utilService.makeId(),
+                type: 'todos',
+                isPinned: false,
+                info: {
+                    label: 'Personal',
+                    todos: [
+                        { txt: 'buy tomatoes', doneAt: null },
+                        { txt: 'delete me', doneAt: 187111111 },
+                    ]
+                },
+                style: {
+                    backgroundColor: '#222',
+                    font: 'impact',
+                }
+            },
         ]);
         _saveNotesToStorage(notes);
     }
@@ -99,9 +115,71 @@ function waitQuery(filterBy = null) {
     });
 }
 
+function addNote(inputText, noteType) {
+    var notes = _loadNotesFromStorage();
+
+    var info;
+    switch (noteType) {
+        case 'txt':
+            info = {
+                title: 'title',
+                txt: inputText,
+            }
+            break;
+        case 'img':
+            info = {
+                imgUrl: inputText,
+            }
+            break;
+        case 'video':
+            info = {
+                videoUrl: inputText,
+            }
+        case 'todos': inputText.split(',').map(todo => ({ txt: todo }))
+            var todos =
+                info = {
+                    todos
+                }
+            break;
+    }
+    console.log(inputText.split(','));
+    const note = {
+        id: utilService.makeId(),
+        type: noteType,
+        isPinned: false,
+        info,
+        style: {
+            backgroundColor: '#fff',
+            font: 'ariel',
+        },
+    }
+    notes.push(note);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+function removeNote(noteId) {
+    var notes = _loadNotesFromStorage();
+    const noteIdxToRemove = notes.findIndex(note => note.id === noteId);
+    notes.splice(noteIdxToRemove, 1);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+
+
 function _getFilteredNotes(notes, filterBy) {
     //todo!
     return notes
+}
+
+function _getNoteById(noteId) {
+    const notes = _loadNotesFromStorage()
+    // return new Promise.Resolve(notes.find(book => book.id === bookId));
+    return new Promise((resolve) => {
+        const note = notes.find(note => note.id === noteId);
+        resolve(note);
+    });
 }
 
 function _saveNotesToStorage(notes) {
