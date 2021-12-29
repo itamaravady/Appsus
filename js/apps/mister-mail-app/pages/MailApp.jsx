@@ -4,7 +4,6 @@ import { mailService } from '../services/mail.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 // import { MailAdd } from '../cmps/MailAdd.jsx'
-// import { eventBusService } from '../../../services/eventBusService.js'
 
 // const { Link, Route } = ReactRouterDOM;
 
@@ -18,11 +17,11 @@ export class MailApp extends React.Component {
     }
 
     componentDidMount() {
-        this.loadBooks()
+        this.loadMails()
     }
 
 
-    loadBooks = () => {
+    loadMails = () => {
         const { filterBy } = this.state
         mailService.query(filterBy).then(mails => {
             this.setState({ mails })
@@ -33,17 +32,17 @@ export class MailApp extends React.Component {
         this.setState({ isShowComposeModal: !this.state.isShowComposeModal });
     };
 
-    // onAddBook = (selectedBook) => {
-    //     console.log(selectedBook);
-    //     mailService.addBook(selectedBook).then(() => {
-    //         this.loadBooks()
-    //         eventBusService.emit('user-msg', { text: 'Added book !', type: 'success' })
-    //     }
-    //     )
-    // }
+    onAddMail = (mail) => {
+        console.log(mail);
+        mailService.addMail(mail).then(() => {
+            this.loadMails()
+            this.onToggleComposeModal()
+        }
+        )
+    }
 
     onSetFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadBooks)
+        this.setState({ filterBy }, this.loadMails)
     }
 
     render() {
@@ -54,8 +53,9 @@ export class MailApp extends React.Component {
                 <MailFilter onSetFilter={this.onSetFilter} />
                 <div className="side-by-side">
                     <div className="compose-container">
-                    <button className="compose-btn" onClick={this.onToggleComposeModal}> <span>+</span> Compose</button>
-                    {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal}/>}
+                        <button className="compose-btn" onClick={this.onToggleComposeModal}> <span>+</span> Compose</button>
+                        {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} />}
+                        {/* <MailFolderList /> */}
                     </div>
                     <MailList mails={mails} />
                 </div>

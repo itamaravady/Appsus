@@ -7,7 +7,9 @@ export class MailFilter extends React.Component {
             txt: '',
             isRead: 'all',
             isStared: '',
-            lables: ''
+            lables: '',
+            isDraft: '',
+            isSend: ''
         }
     }
 

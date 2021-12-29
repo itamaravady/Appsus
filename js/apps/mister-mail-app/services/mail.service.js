@@ -10,12 +10,13 @@ export const mailService = {
     addReview,
     removeReview,
     addGoogleBook,
-    addBook,
+    addMail,
     getNextPrevById,
     changeReadMail
 }
 
 const KEY = 'mailsDB'
+const SENTKEY = 'sentMailsDB'
 
 const gLoggedinUser = {
     email: 'user@appsus.com',
@@ -117,25 +118,21 @@ function addGoogleBook(googleBook) {
 
 }
 
-function addBook(selectedBook) {
-    let books = _loadFromStorage()
-    const book = {
-        title: selectedBook['volumeInfo']['title'],
-        id: selectedBook.id,
-        description: selectedBook['volumeInfo']['description'],
-        publishedDate: +selectedBook['volumeInfo']['publishedDate'].substring(0, selectedBook['volumeInfo']['publishedDate'].indexOf('-')),
-        thumbnail: selectedBook['volumeInfo']['imageLinks']['thumbnail'],
-        reviews: [],
-        pageCount: +selectedBook['volumeInfo']['pageCount'],
-        listPrice: {
-            amount: utilService.getRandomIntInclusive(50, 200),
-            isOnSale: Math.random() > 0.5 ? true : false,
-            currencyCode: 'ILS'
-        }
+function addMail(newMail) {
+    let mails = _loadFromStorage()
+
+    const mail = {
+        ...newMail,
+        id: utilService.makeId(),
+        from: gLoggedinUser.fullname,
+        fromMail: gLoggedinUser.email,
+        sentAt: Date.now(),
     }
 
-    books = [book, ...books]
-    _saveToStorage(books)
+
+    mails = [mail, ...mails]
+    console.log(mails);
+    _saveToStorage(mails)
     return Promise.resolve()
 }
 
@@ -200,7 +197,9 @@ function getMails() {
             sentAt: Date.now(),
             to: gLoggedinUser.email,
             from: 'Shuki',
-            fromMail: 'Shuki@gmail.com'
+            fromMail: 'Shuki@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -210,7 +209,9 @@ function getMails() {
             sentAt: 15511339319,
             to: gLoggedinUser.email,
             from: 'Puki',
-            fromMail: 'Puki@gmail.com'
+            fromMail: 'Puki@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -220,7 +221,9 @@ function getMails() {
             sentAt: 1551,
             to: gLoggedinUser.email,
             from: 'Rooki',
-            fromMail: 'Rooki@gmail.com'
+            fromMail: 'Rooki@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -230,7 +233,9 @@ function getMails() {
             sentAt: 155113,
             to: gLoggedinUser.email,
             from: 'Steph Curry',
-            fromMail: 'Steph@gmail.com'
+            fromMail: 'Steph@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -240,7 +245,9 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'My Brother',
-            fromMail: 'Bro@gmail.com'
+            fromMail: 'Bro@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -250,7 +257,9 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Jennifer Aniston',
-            fromMail: 'jennn111@gmail.com'
+            fromMail: 'jennn111@gmail.com',
+            isDraft: false,
+            isSent: false
         },
         {
             id: utilService.makeId(),
@@ -260,7 +269,9 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Ben Afleck',
-            fromMail: 'BatmanCool@gmail.com'
+            fromMail: 'BatmanCool@gmail.com',
+            isDraft: false,
+            isSent: false
         },
     ]
 }
