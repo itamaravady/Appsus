@@ -34,14 +34,18 @@ function query(filterBy) {
 }
 
 function _getFilteredMails(mails, filterBy) {
-    // console.log(filterBy);
-    let { name, minPrice, maxPrice } = filterBy
-    // console.log(name);
-    minPrice = minPrice ? minPrice : 0
-    maxPrice = maxPrice ? maxPrice : Infinity
-    return mails.filter(mail => {
-        return mail.title.toLowerCase().includes(name.toLowerCase()) && mail.listPrice.amount >= minPrice && mail.listPrice.amount <= maxPrice
+    let { txt, isRead } = filterBy
+    const txtFilteredMails = mails.filter(mail => {
+        return mail.subject.toLowerCase().substring(0, txt.length) === txt.toLowerCase() ||
+            mail.from.toLowerCase().substring(0, txt.length) === txt.toLowerCase()
     })
+
+    if (isRead === 'all') return txtFilteredMails
+    const filteredMails = txtFilteredMails.filter(mail => {
+        return mail.isRead === isRead
+    })
+    return filteredMails
+
 }
 
 function getById(mailId) {
@@ -196,7 +200,7 @@ function getMails() {
             sentAt: Date.now(),
             to: gLoggedinUser.email,
             from: 'Shuki',
-            fromMail:'Shuki@gmail.com'
+            fromMail: 'Shuki@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -206,7 +210,7 @@ function getMails() {
             sentAt: 15511339319,
             to: gLoggedinUser.email,
             from: 'Puki',
-            fromMail:'Puki@gmail.com'
+            fromMail: 'Puki@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -216,7 +220,7 @@ function getMails() {
             sentAt: 1551,
             to: gLoggedinUser.email,
             from: 'Rooki',
-            fromMail:'Rooki@gmail.com'
+            fromMail: 'Rooki@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -226,7 +230,7 @@ function getMails() {
             sentAt: 155113,
             to: gLoggedinUser.email,
             from: 'Steph Curry',
-            fromMail:'Steph@gmail.com'
+            fromMail: 'Steph@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -236,7 +240,7 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'My Brother',
-            fromMail:'Bro@gmail.com'
+            fromMail: 'Bro@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -246,7 +250,7 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Jennifer Aniston',
-            fromMail:'jennn111@gmail.com'
+            fromMail: 'jennn111@gmail.com'
         },
         {
             id: utilService.makeId(),
@@ -256,7 +260,7 @@ function getMails() {
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Ben Afleck',
-            fromMail:'BatmanCool@gmail.com'
+            fromMail: 'BatmanCool@gmail.com'
         },
     ]
 }

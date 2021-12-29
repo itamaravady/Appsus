@@ -20,6 +20,8 @@
 @import './apps/mail/mail-preview.css';
 @import './apps/mail/mail-details.css';
 @import './apps/mail/mail-app.css';
+@import './apps/mail/mail-filter.css';
+@import './apps/mail/mail-compose.css';
 
 
 

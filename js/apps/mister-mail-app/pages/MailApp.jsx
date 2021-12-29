@@ -1,21 +1,20 @@
 
 import { MailList } from '../cmps/MailList.jsx'
 import { mailService } from '../services/mail.service.js'
-// import { MailFilter } from '../cmps/MailFilter.jsx'
+import { MailFilter } from '../cmps/MailFilter.jsx'
+import { MailCompose } from '../cmps/MailCompose.jsx'
 // import { MailAdd } from '../cmps/MailAdd.jsx'
 // import { eventBusService } from '../../../services/eventBusService.js'
+
+// const { Link, Route } = ReactRouterDOM;
+
 
 export class MailApp extends React.Component {
 
     state = {
         mails: [],
-        fiterBy: {
-            status: '',
-            txt: '',
-            isRead: false,
-            isStared: false,
-            lables: ''
-        }
+        fiterBy: null,
+        isShowComposeModal: false
     }
 
     componentDidMount() {
@@ -30,6 +29,10 @@ export class MailApp extends React.Component {
         })
     }
 
+    onToggleComposeModal = () => {
+        this.setState({ isShowComposeModal: !this.state.isShowComposeModal });
+    };
+
     // onAddBook = (selectedBook) => {
     //     console.log(selectedBook);
     //     mailService.addBook(selectedBook).then(() => {
@@ -39,17 +42,23 @@ export class MailApp extends React.Component {
     //     )
     // }
 
-    // onSetFilter = (filterBy) => {
-    //     this.setState({ filterBy }, this.loadBooks)
-    // }
+    onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, this.loadBooks)
+    }
 
     render() {
-        const { mails } = this.state
-        console.log(mails);
+        const { mails, isShowComposeModal } = this.state
         if (!mails) return
         return (
             <section className="mail-app">
-                <MailList mails={mails} />
+                <MailFilter onSetFilter={this.onSetFilter} />
+                <div className="side-by-side">
+                    <div className="compose-container">
+                    <button className="compose-btn" onClick={this.onToggleComposeModal}> <span>+</span> Compose</button>
+                    {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal}/>}
+                    </div>
+                    <MailList mails={mails} />
+                </div>
             </section>
         )
     }

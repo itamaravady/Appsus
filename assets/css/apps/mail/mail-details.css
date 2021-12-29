@@ -17,11 +17,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid black;
 }
 
 .details-section {
   background-color: white;
   min-height: 90vh;
+}
+
+.details-section h1{
+  font-size: 1.5em;
+  text-transform: capitalize;
+}
+
+.details-section h4{
+  padding-top: 20px;
 }
 
 .details-section h4 small{
@@ -32,4 +42,5 @@
 .details-section p {
   padding: 0 50px;
   border-bottom: 1px solid black;
+  padding-bottom: 20px;
 }

@@ -30,7 +30,7 @@ export class BookFilter extends React.Component {
         const { title, price } = this.state.filterBy;
         return (
 
-            <form classtitle="book-filter" onSubmit={this.onSubmitFilter}>
+            <form classtitle="book-filter" className="book-filter-form" onSubmit={this.onSubmitFilter}>
                 <label htmlFor="by-title">By Title:
                     <input
                         type="text"

@@ -15,17 +15,17 @@ export class MailDetails extends React.Component {
         this.loadMail()
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.match.params.mailId !== this.props.match.params.mailId) {
-            this.loadMail()
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.match.params.mailId !== this.props.match.params.mailId) {
+    //         this.loadMail()
+    //     }
+    // }
 
     loadMail = () => {
         const { mailId } = this.props.match.params
         console.log('mailId in mailDeatails', mailId);
         mailService.getById(mailId).then(mail => {
-            if (!mail) return this.props.history.push('/')
+            if (!mail) return this.props.history.push('/mail')
             this.setState({ mail })
         })
     }
