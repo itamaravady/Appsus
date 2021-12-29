@@ -1,0 +1,56 @@
+.book-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1d1d1d;
+
+}
+
+.book-add button {
+    align-self: flex-start;
+}
+
+.book-add input {
+    border-radius: 2em;
+    border: 1px solid #9e9e9e;
+    height: 2em;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar .add-books-list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    background-color: #F2E8CF;
+    box-shadow: 0 5px 9px 3px #999999;
+    padding: 5px;
+    z-index: 5;
+}
+
+.search-bar .add-books-list>* {
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    margin-block: 3px;
+    color: #1d1d1d;
+}
+
+.search-bar .add-books-list>*:hover {
+
+    background-color: #ebdab1;
+
+}
+
+.search-bar .add-books-list>*:hover::after {
+    background-color: rgb(253, 143, 143);
+    color: white;
+    padding-inline: 3px;
+    font-weight: 700;
+    margin-inline-start: 3px;
+    content: '+';
+
+}

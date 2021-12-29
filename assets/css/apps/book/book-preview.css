@@ -1,0 +1,19 @@
+.book-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-top: 10px solid #1d1d1d;
+    padding: 30px;
+    transition: 0.3s ease-in-out;
+}
+
+.book-preview:hover {
+    transform: scale(1.05);
+}
+
+.book-preview img {
+    height: 170px;
+    margin-block-end: 20px;
+}

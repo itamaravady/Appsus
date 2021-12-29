@@ -1,0 +1,17 @@
+.book-reviews {
+    display: flex;
+    justify-content: center;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+.review-list li {
+    background-color: #386641;
+    color: white;
+
+}

@@ -1,0 +1,24 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;
+}
+
+.home-title {
+    text-align: center;
+}
+
+.home button {
+    width: 250px;
+    height: 50px;
+    align-self: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.home button:hover {
+    transform: scale(1.05);
+}

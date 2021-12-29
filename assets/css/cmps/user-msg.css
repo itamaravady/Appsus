@@ -1,0 +1,16 @@
+.user-msg {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 0.8rem;
+    border: 5px solid #74d484;
+    padding: 0 10px;
+    box-shadow: -1px 3px 2px 1px #8b8b8b;
+    color: #3d3d3d;
+}

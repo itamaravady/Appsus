@@ -1,0 +1,50 @@
+.book-details-container {
+    display: flex;
+    gap: 10px;
+    color: #1d1d1d;
+    background-color: rgb(255, 253, 245);
+}
+
+.book-details-container .img-container {
+    min-width: 300px;
+}
+
+.book-details-container .book-details {
+    min-width: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.book-details-container .book-info {
+    margin-block-end: 10px;
+    line-height: 1.6rem;
+}
+
+.book-details h2 span {
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+.book-details-container .book-details button {
+    align-self: flex-end;
+}
+
+.book-details-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.book-details h2 {
+
+    margin-block-end: 20px;
+}
+
+.book-details .red {
+    color: red;
+}
+
+.book-details .green {
+    color: green;
+}

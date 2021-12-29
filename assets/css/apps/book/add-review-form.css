@@ -1,0 +1,16 @@
+.add-review {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 300px;
+    width: 230px;
+    gap: 20px;
+    background-color: #F2E8CF;
+    padding: 20px;
+    border: 5px solid white
+}
+
+.add-review textarea {
+    resize: none;
+}
