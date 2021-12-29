@@ -7,7 +7,7 @@ import { Loader } from '../../../cmps/Loader.jsx'
 export class NoteApp extends React.Component {
 
     state = {
-        notes: [],
+        notes: null,
         filterBy: null,
     }
 
@@ -28,22 +28,22 @@ export class NoteApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
-    onSelectNote = (note) => {
-        this.setState({ selectedNote: note })
-    }
+    // onSelectNote = (note) => {
+    //     this.setState({ selectedNote: note })
+    // }
 
-    onUnSelectNote = () => {
-        this.setState({ selectedNote: null })
-    }
+    // onUnSelectNote = () => {
+    //     this.setState({ selectedNote: null })
+    // }
 
     render() {
         const notesToShow = this.state.notes;
         return (
             <section>
-                <noteAdd history={this.props.history} />
-                <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
-                {!notesToShow.length && <Loader />}
-                <noteList notes={notesToShow} />
+                {/* <noteAdd history={this.props.history} /> */}
+                {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
+                {!notesToShow ? <Loader /> : <NoteList notes={notesToShow} />}
+
 
             </section>
         )

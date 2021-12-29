@@ -32,9 +32,8 @@ export class UserMsg extends React.Component {
     }
 
     render() {
-        console.log('did render');
         const { msg } = this.state
-        console.log(msg);
+
         if (!msg) return <React.Fragment></React.Fragment>
         return (
             <div className="user-msg" >

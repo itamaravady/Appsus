@@ -1,5 +1,13 @@
+// books
 import { BookApp } from './js/apps/miss-book-app/pages/BookApp.jsx'
 import { BookDetails } from './js/apps/miss-book-app/pages/BookDetails.jsx'
+
+// notes
+import { NoteApp } from './js/apps/mister-keep-app/pages/NoteApp.jsx'
+import { NoteDetails } from './js/apps/mister-keep-app/pages/NoteDetails.jsx'
+
+//general
+
 import { About } from './js/pages/About.jsx'
 import { Home } from './js/pages/Home.jsx'
 import { AppHeader } from './js/cmps/AppHeader.jsx'
@@ -15,11 +23,17 @@ export function App() {
                 <AppHeader />
                 <main>
                     <Switch>
+                        {/* books */}
                         <Route component={BookDetails} path="/book/:bookId" />
                         <Route component={BookApp} path="/book" />
+
+                        {/* note */}
+                        <Route component={NoteDetails} path="/note/:noteId" />
+                        <Route component={NoteApp} path="/note" />
+
+
+                        {/* general */}
                         <Route component={About} path="/about" />
-
-
                         <Route component={Home} path="/" />
                     </Switch>
                 </main>
