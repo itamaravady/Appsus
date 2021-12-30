@@ -1,8 +1,9 @@
 .mail-app .compose-btn {
   transform: scale(1);
   border-radius: 0;
-  height: 50px;
-  margin: 0 15px;
+  /* height: 50px; */
+  margin: 0;
+  width: 100%;
   padding: 5px;
   background-color: rgb(255, 255, 255);
   font-size: 24px;

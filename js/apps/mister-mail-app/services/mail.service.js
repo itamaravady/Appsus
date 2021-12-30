@@ -12,41 +12,69 @@ export const mailService = {
     addGoogleBook,
     addMail,
     getNextPrevById,
-    changeReadMail
+    changeReadMail,
+    addStar
 }
 
 const KEY = 'mailsDB'
-const SENTKEY = 'sentMailsDB'
 
 const gLoggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
-// const GOOGLEKEY = 'googleBooksDB'
-// let gMails = {}
 
 _createMails()
 
 function query(filterBy) {
     const mails = _loadFromStorage()
-    if (!filterBy) return Promise.resolve(mails)
-    const filteredBooks = _getFilteredMails(mails, filterBy)
-    return Promise.resolve(filteredBooks)
+    let recievedMails;
+    recievedMails = _getFilteredMails(mails, filterBy)
+
+    return Promise.resolve(recievedMails)
+}
+
+function _getStatusStarredMails(mails, filterBy) {
+    if (filterBy.isStarred) return mails.filter(mail => mail.isStarred === filterBy.isStarred)
+    if (filterBy.status) return mails.filter(mail => mail.status === filterBy.status)
+    if (filterBy.isRead !== 'all') return mails.filter(mail => mail.isRead === filterBy.isRead)
+    if (filterBy.isRead === 'all') return mails.filter(mail => mail.status === 'inbox')
+    return mails
 }
 
 function _getFilteredMails(mails, filterBy) {
-    let { txt, isRead } = filterBy
-    const txtFilteredMails = mails.filter(mail => {
-        return mail.subject.toLowerCase().substring(0, txt.length) === txt.toLowerCase() ||
-            mail.from.toLowerCase().substring(0, txt.length) === txt.toLowerCase()
-    })
+    let newMails = _getStatusStarredMails(mails, filterBy)
 
-    if (isRead === 'all') return txtFilteredMails
-    const filteredMails = txtFilteredMails.filter(mail => {
-        return mail.isRead === isRead
-    })
-    return filteredMails
+    let { txt } = filterBy
+    let txtFilteredMails
+    if (!txt) {
+        txtFilteredMails = newMails
+    } else {
+        txtFilteredMails = newMails.filter(mail => {
+            return mail.subject.toLowerCase().includes(txt.toLowerCase()) ||
+                mail.from.toLowerCase().includes(txt.toLowerCase())
+        })
+    }
 
+    return txtFilteredMails
+    // if (isRead !== 'all') {
+    //     const filteredMails = txtFilteredMails.filter(mail => {
+    //         return mail.isRead === isRead && mail.status === 'inbox'
+    //     })
+    //     return filteredMails
+    // } else {
+    //     const filteredMails = txtFilteredMails.filter(mail => {
+    //         return mail.status === 'inbox'
+    //     })
+    //     return filteredMails
+    // }
+}
+
+function addStar(mailId) {
+    const mails = _loadFromStorage()
+    const mail = mails.find(mail => mailId === mail.id)
+    mail.isStarred = !mail.isStarred
+    _saveToStorage(mails)
+    return Promise.resolve(mail)
 }
 
 function getById(mailId) {
@@ -194,84 +222,91 @@ function getMails() {
             subject: 'Miss you!',
             body: 'Would love to catch up sometimes',
             isRead: false,
+            isStarred: false,
             sentAt: Date.now(),
             to: gLoggedinUser.email,
             from: 'Shuki',
             fromMail: 'Shuki@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
             subject: 'wassup?',
             body: 'Would love to catch up sometimes',
             isRead: false,
+            isStarred: true,
             sentAt: 15511339319,
             to: gLoggedinUser.email,
             from: 'Puki',
             fromMail: 'Puki@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
             subject: 'wassup?',
             body: 'Would love to catch up sometimes',
             isRead: false,
+            isStarred: false,
             sentAt: 1551,
             to: gLoggedinUser.email,
             from: 'Rooki',
             fromMail: 'Rooki@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
             subject: 'play a game bruh',
             body: 'Wanna play some basketball??',
             isRead: false,
+            isStarred: false,
             sentAt: 155113,
             to: gLoggedinUser.email,
             from: 'Steph Curry',
             fromMail: 'Steph@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
             subject: 'Money man...',
             body: 'I really need the money back bro, not cool!',
             isRead: false,
+            isStarred: false,
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'My Brother',
             fromMail: 'Bro@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
             subject: 'The Date',
             body: 'So when will you pick me up???',
             isRead: false,
+            isStarred: false,
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Jennifer Aniston',
             fromMail: 'jennn111@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
         {
             id: utilService.makeId(),
-            subject: 'Promblem brother',
+            subject: 'Problem brother',
             body: 'if you touch Jennnifer, you wiil have a problem with me man!',
             isRead: false,
+            isStarred: false,
             sentAt: 1551133931912,
             to: gLoggedinUser.email,
             from: 'Ben Afleck',
             fromMail: 'BatmanCool@gmail.com',
-            isDraft: false,
-            isSent: false
+            status: 'inbox'
+
         },
     ]
 }

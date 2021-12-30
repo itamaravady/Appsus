@@ -1,0 +1,40 @@
+
+.google-book-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-add-card{
+    display: flex;
+    gap: 10px;
+}
+
+.book-add-card button{
+    font-weight: bold;
+    background-color:azure;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.book-add-card button:hover{
+    background-color: rgb(176, 180, 180);
+}
+
+.search-input{
+    border-radius: 5px;
+    height: 40px;
+    width: 400px;
+}
+
+.search-btn{
+    margin-inline-start: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 40px;
+}
+
+
+
+
+

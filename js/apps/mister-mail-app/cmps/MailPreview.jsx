@@ -5,7 +5,7 @@ const { Link } = ReactRouterDOM
 
 
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onAddStar }) {
 
     function getShortBody() {
         if (mail.body.length > 30) {
@@ -33,11 +33,17 @@ export function MailPreview({ mail }) {
         mailService.changeReadMail(mail.id)
     }
 
+    // let starClass = ''
+    function toggleStar(mailId) {
+        onAddStar(mailId)
+        // starClass = 'star'
+    }
+
     return (
         <section>
-            <Link onClick={changeReadMail} className="clean-link" to={`/mail/${mail.id}`}>
-                < article
-                    className="mail-preview" >
+            < article className="mail-preview" >
+                <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
+                <Link onClick={changeReadMail} className="clean-link" to={`/mail/${mail.id}`}>
                     <ul className="list-info-mail clean-list">
                         <li>{mail.from}</li>
                         <div className="body-title-container">
@@ -46,8 +52,8 @@ export function MailPreview({ mail }) {
                         </div>
                         <li>{getTime(mail.sentAt)}</li>
                     </ul>
-                </article >
-            </Link>
+                </Link>
+            </article >
 
         </section>
     )

@@ -3,13 +3,11 @@
 export class MailFilter extends React.Component {
     state = {
         filterBy: {
-            status: '',
             txt: '',
             isRead: 'all',
-            isStared: '',
+            isStarred: false,
+            status:'',
             lables: '',
-            isDraft: '',
-            isSend: ''
         }
     }
 

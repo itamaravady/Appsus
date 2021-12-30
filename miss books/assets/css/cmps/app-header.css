@@ -1,0 +1,26 @@
+
+.app-header{
+  background-color: rgb(136, 132, 132);
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10vh;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
+.app-header .main-nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.app-header .main-nav a.active {
+  color: #316a81;
+}
+
+.app-header .main-nav > *:not(:last-child) {
+  margin-inline-end: 1rem;
+}
