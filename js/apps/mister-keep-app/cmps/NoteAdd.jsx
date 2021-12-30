@@ -13,7 +13,6 @@ export class NoteAdd extends React.Component {
 
     componentDidMount() {
         this.removeEventBus = eventBusService.on('edit-note', (note) => {
-            console.log('bus:', note);
             this.setState({ inputTxt: note.info.inputTxt, noteType: note.type, noteId: note.id, });
         })
     }
@@ -33,13 +32,17 @@ export class NoteAdd extends React.Component {
     submit = (ev) => {
         ev.preventDefault();
         const { inputTxt: inputTxt, noteType, noteId } = this.state;
-        console.log(noteId);
         noteService.addNote(inputTxt, noteType, noteId)
             .then((note) => {
 
                 if (note) eventBusService.emit('done-edit', note);
                 else this.props.loadNotes();
-                // this.props.loadNotes();
+                this.setState({
+                    inputTxt: '',
+                    noteType: 'txt',
+                    placeHolder: 'Type note...',
+                    noteId: null,
+                });
 
             });
     }

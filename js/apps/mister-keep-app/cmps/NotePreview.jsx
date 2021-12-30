@@ -37,7 +37,6 @@ export class NotePreview extends React.Component {
     }
 
     onEdit = (note) => {
-        console.log('on edit', note);
         eventBusService.emit('edit-note', note)
     }
 

@@ -11,7 +11,6 @@ export class UserMsg extends React.Component {
     componentDidMount() {
 
         this.removeEventBus = eventBusService.on('user-msg', (msg) => {
-            console.log(msg);
             this.setState({ msg }, this.onAutoClose);
         })
     }
