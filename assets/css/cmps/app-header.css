@@ -1,14 +1,15 @@
 .header-container {
     background-color: #F2E8CF;
-    height: 10vh;
+    height: 80px;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
+    height: 100%;
     color: #1d1d1d;
+    position: relative;
 }
 
 .app-header h1 {

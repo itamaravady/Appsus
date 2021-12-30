@@ -7,11 +7,11 @@ export function NoteForDisplay({ note, classes }) {
             {info.label && <h4 className="label">{info.label}</h4>}
             {info.title && <h3 className="note-title">{info.title}</h3>}
             {info.txt && <p className="note-txt">{info.txt}</p>}
-            {info.imgUrl && <div className="note-img-container"><img src={info.imgUrl} /></div>}
+            {info.img && <div className="note-img-container"><img src={info.img} /></div>}
             {
-                info.videoUrl && (
+                info.video && (
                     <video className="note-video" width="150" controls>
-                        <source src={info.videoUrl} type="video/mp4" />
+                        <source src={info.video} type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
                 )

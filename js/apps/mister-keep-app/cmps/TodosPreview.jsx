@@ -1,7 +1,8 @@
 import { utilService } from '../../../services/util.service.js'
 
 export function TodosPreview(props) {
-    const { todos } = props;
+    var { todos } = props;
+    todos = todos.split(',').map(todo => ({ txt: todo }))
     return (
 
         <ul>

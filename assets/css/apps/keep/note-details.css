@@ -1,0 +1,28 @@
+.note-details .note-title {
+    margin-block-end: 10px;
+}
+
+.note-details .note-img-container {
+    width: 100%;
+}
+
+.note-details .note-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.note-details .note-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* .note-menu {
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.note-menu.open {
+    opacity: 1;
+} */
