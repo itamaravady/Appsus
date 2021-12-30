@@ -1,8 +1,9 @@
-
-.app-header{
+.header-container {
     background-color: #F2E8CF;
+    height: 10vh;
 }
-.main-header {
+
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;

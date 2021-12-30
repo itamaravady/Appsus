@@ -1,19 +1,19 @@
 .nav-links {
     width: 200px;
-    height: 200px;
+    height: 0px;
     background-color: #fff;
     position: absolute;
-    top: 10%;
-    right: 0;
-    /* transform: translate(100%, 0); */
+    top: 60px;
+    right: 87px;
     opacity: 0;
-    transition: all 5s;
+    transition: all 0.3s ease-in-out;
     pointer-events: none;
     z-index: 5;
+    box-shadow: 0 3px 8px 1px #afafaf;
 }
 
 .nav-links.open {
-    /* transition: opacity 5s; */
+    height: 200px;
     opacity: 1;
     pointer-events: auto;
 }

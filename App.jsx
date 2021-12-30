@@ -31,7 +31,7 @@ export function App() {
                         <Route component={BookApp} path="/book" />
 
                         {/* note */}
-                        <Route component={NoteDetails} path="/note/:noteId" />
+                        {/* <Route component={NoteDetails} path="/note/:noteId" /> */}
                         <Route component={NoteApp} path="/note" />
 
                         {/* Mail */}

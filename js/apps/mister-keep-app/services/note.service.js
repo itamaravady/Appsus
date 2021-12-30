@@ -6,10 +6,8 @@ export const noteService = {
     query,
     removeNote,
     addNote,
-    // getBookById,
-    // addReview,
-    // searchBooks,
-    // addGoogleBook,
+    getNoteById,
+
 }
 
 const KEY = 'noteDB';
@@ -174,11 +172,12 @@ function _getFilteredNotes(notes, filterBy) {
     return notes
 }
 
-function _getNoteById(noteId) {
+function getNoteById(noteId) {
     const notes = _loadNotesFromStorage()
     // return new Promise.Resolve(notes.find(book => book.id === bookId));
     return new Promise((resolve) => {
         const note = notes.find(note => note.id === noteId);
+        // console.log(note);
         resolve(note);
     });
 }

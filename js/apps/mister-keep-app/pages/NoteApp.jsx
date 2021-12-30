@@ -10,7 +10,7 @@ export class NoteApp extends React.Component {
     state = {
         notes: null,
         filterBy: null,
-        selectedNote: null,
+        // selectedNote: null,
     }
 
     componentDidMount() {
@@ -30,14 +30,14 @@ export class NoteApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
-    onSelectNote = (note) => {
-        console.log('onSelectNote', note);
-        this.setState({ selectedNote: note })
-    }
+    // onSelectNote = (note) => {
+    //     console.log('onSelectNote', note);
+    //     this.setState({ selectedNote: note })
+    // }
 
-    onUnSelectNote = () => {
-        this.setState({ selectedNote: null })
-    }
+    // onUnSelectNote = () => {
+    //     this.setState({ selectedNote: null })
+    // }
 
     render() {
         const { notes, selectedNote } = this.state;
@@ -49,10 +49,10 @@ export class NoteApp extends React.Component {
                     <NoteList
                         loadNotes={this.loadNotes}
                         notes={notes}
-                        onSelectNote={this.onSelectNote}
+                    // onSelectNote={this.onSelectNote}
                     />
                 }
-                {selectedNote && <NoteEdit />}
+                {/* {selectedNote && <NoteEdit />} */}
 
 
             </section>
