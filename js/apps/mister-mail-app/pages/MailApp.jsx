@@ -4,8 +4,9 @@ import { mailService } from '../services/mail.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
 import { MailFolderList } from '../cmps/MailFolderList.jsx'
+import { MailDetails } from './MailDetails.jsx'
 
-// const { Link, Route } = ReactRouterDOM;
+const { Link, Route, Switch } = ReactRouterDOM;
 
 
 export class MailApp extends React.Component {
@@ -15,7 +16,6 @@ export class MailApp extends React.Component {
         filterBy: {
             status: 'inbox',
         },
-        isShowComposeModal: false
     }
 
     componentDidMount() {
@@ -31,7 +31,7 @@ export class MailApp extends React.Component {
     }
 
     onToggleComposeModal = () => {
-        this.setState({ isShowComposeModal: !this.state.isShowComposeModal });
+        this.props.history.push('/mail')
     };
 
     onAddMail = (mail) => {
@@ -51,22 +51,44 @@ export class MailApp extends React.Component {
             .then(() => this.loadMails())
     }
 
+    onRemoveMail = (mailId) => {
+        mailService.remove(mailId)
+            .then(() => this.loadMails())
+    }
+
     render() {
-        const { mails, isShowComposeModal } = this.state
+        const { mails } = this.state
         if (!mails) return
         return (
             <section className="mail-app">
                 <MailFilter onSetFilter={this.onSetFilter} />
                 <div className="side-by-side">
-                    <div className="compose-container">
-                        <button className="compose-btn" onClick={this.onToggleComposeModal}> <span>+</span> Compose</button>
-                        {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} />}
+                    <div>
+                        <Link className="compose-btn clean-link" to="/mail/compose"> <span>+</span> Compose</Link>
                         <MailFolderList onSetFilter={this.onSetFilter} />
                     </div>
-                    <MailList mails={mails} onAddStar={this.onAddStar} />
+                    <div>
+                        <Switch>
+                            <Route render={(props) => <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail = {this.onRemoveMail} {...props} />} path="/mail/compose/:mailId?" />
+                            <Route component={MailDetails} path="/mail/:mailId" />
+                        </Switch>
+                    </div>
+                    <MailList mails={mails} onAddStar={this.onAddStar} onToggleComposeModal={this.onToggleComposeModal} />
+
                 </div>
             </section>
         )
     }
 }
 
+// /* <div>
+//     <Link className="compose-btn clean-link" to="/mail/compose"> <span>+</span> Compose</Link>
+//     <MailFolderList onSetFilter={this.onSetFilter} />
+// </div>
+// <div>
+//     <Switch>
+//         <Route component={MailDetails} path="/mail/:mailId" />
+//         <Route render={(props) => <MailList mails={mails} onAddStar={this.onAddStar} onToggleComposeModal={this.onToggleComposeModal} {...props} />} path="/mail" />
+//     </Switch>
+// </div>
+// <Route render={(props) => <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} {...props} />} path="/mail/compose/:mailId?" />

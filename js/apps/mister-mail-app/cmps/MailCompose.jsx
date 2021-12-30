@@ -1,4 +1,9 @@
+import { Loader } from '../../../cmps/Loader.jsx';
 import { eventBusService } from '../../../services/eventBusService.js'
+import { mailService } from '../services/mail.service.js';
+
+
+const { Link } = ReactRouterDOM;
 
 
 export class MailCompose extends React.Component {
@@ -8,6 +13,11 @@ export class MailCompose extends React.Component {
             subject: '',
             body: '',
         }
+    }
+
+    componentDidMount() {
+        this.loadDraft()
+
     }
 
     handleChange = ({ target }) => {
@@ -27,13 +37,29 @@ export class MailCompose extends React.Component {
     }
 
     saveDraft = () => {
-        this.setState((prevState) => ({ mail: { ...prevState.mail, ['status']: 'draft' } }), () => {
-            this.props.onAddMail(this.state.mail)
-        })
+        if (this.state.mail.status) return this.props.onToggleComposeModal()
+        this.props.onAddMail(this.state.mail)
+
+
+    }
+
+    loadDraft = () => {
+        const { mailId: id } = this.props.match.params
+        if (!id) return false
+        mailService.getById(id)
+            .then(mail => {
+                this.setState({ mail })
+            })
+    }
+
+    onRemove = () => {
+        const { mailId } = this.props.match.params
+        if (mailId) this.props.onRemoveMail(mailId)
+        this.props.onToggleComposeModal()
     }
 
     render() {
-        const { to, subject, body } = this.state
+        const { to, subject, body } = this.state.mail
         return (
             <section className="mail-compose-section">
                 <header className="new-mail-header">
@@ -49,8 +75,8 @@ export class MailCompose extends React.Component {
                     </label>
                     <textarea name="body" value={body} onChange={this.handleChange}></textarea>
                     <div className="options-new-mail">
-                        <button type="submit">Send</button>
-                        <img onClick={this.props.onToggleComposeModal} src="assets/img/email-img/trash.png" />
+                        <Link to="/mail" onClick={this.submit}>Send</Link>
+                        <img onClick={this.onRemove} src="assets/img/email-img/trash.png" />
                     </div>
                 </form>
             </section>

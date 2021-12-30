@@ -35,7 +35,7 @@ export function App() {
                         <Route component={NoteApp} path="/note" />
 
                         {/* Mail */}
-                        <Route component={MailDetails} path="/mail/:mailId" />
+                        {/* <Route component={MailDetails} path="/mail/:mailId" /> */}
                         <Route component={MailApp} path="/mail" />
 
                         {/* general */}

@@ -5,7 +5,7 @@ const { Link } = ReactRouterDOM
 
 
 
-export function MailPreview({ mail, onAddStar }) {
+export function MailPreview({ mail, onAddStar, onToggleComposeModal }) {
 
     function getShortBody() {
         if (mail.body.length > 30) {
@@ -33,17 +33,20 @@ export function MailPreview({ mail, onAddStar }) {
         mailService.changeReadMail(mail.id)
     }
 
-    // let starClass = ''
     function toggleStar(mailId) {
         onAddStar(mailId)
-        // starClass = 'star'
+    }
+
+    function getDraftMail() {
+        onToggleComposeModal()
     }
 
     return (
         <section>
             < article className="mail-preview" >
                 <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
-                <Link onClick={changeReadMail} className="clean-link" to={`/mail/${mail.id}`}>
+                <Link onClick={mail.status !== 'draft' ? changeReadMail : getDraftMail} className="clean-link"
+                    to={mail.status !== 'draft' ? `/mail/${mail.id}` : `/mail/compose/${mail.id}`}>
                     <ul className="list-info-mail clean-list">
                         <li>{mail.from}</li>
                         <div className="body-title-container">

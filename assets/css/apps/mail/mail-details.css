@@ -23,6 +23,7 @@
 .details-section {
   background-color: white;
   min-height: 90vh;
+  width: 100%;
 }
 
 .details-section h1{

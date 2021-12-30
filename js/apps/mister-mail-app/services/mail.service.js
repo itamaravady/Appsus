@@ -78,6 +78,7 @@ function addStar(mailId) {
 }
 
 function getById(mailId) {
+    // console.log('hi');
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mailId === mail.id)
     return Promise.resolve(mail)
@@ -114,7 +115,6 @@ function addReview(bookId, review) {
 function removeReview(reviewId, bookId) {
     const books = _loadFromStorage()
     const book = books.find(book => book.id === bookId)
-    console.log(book);
     book.reviews = book.reviews.filter(review => review.id !== reviewId)
     _saveToStorage(books)
     return Promise.resolve()
@@ -149,25 +149,34 @@ function addGoogleBook(googleBook) {
 function addMail(newMail) {
     let mails = _loadFromStorage()
 
+    if (newMail.status === 'draft') {
+        console.log(newMail);
+        let selectedMail = mails.find(mail => mail.id === newMail.id)
+        selectedMail.status = 'sent'
+
+        _saveToStorage(mails)
+        return Promise.resolve()
+    }
+
     const mail = {
         ...newMail,
         id: utilService.makeId(),
         from: gLoggedinUser.fullname,
         fromMail: gLoggedinUser.email,
         sentAt: Date.now(),
+        status: (newMail.status = newMail.status) ? newMail.status : 'draft'
     }
 
 
     mails = [mail, ...mails]
-    console.log(mails);
     _saveToStorage(mails)
     return Promise.resolve()
 }
 
-function remove(bookId) {
-    var books = _loadFromStorage()
-    books = books.filter(book => book.id !== bookId)
-    _saveToStorage(books)
+function remove(mailId) {
+    var mails = _loadFromStorage()
+    mails = mails.filter(mail => mail.id !== mailId)
+    _saveToStorage(mails)
     return Promise.resolve()
 }
 
@@ -201,7 +210,7 @@ function changeReadMail(mailId) {
     const mail = mails.find(mail => mail.id === mailId)
     mail.isRead = true
     _saveToStorage(mails)
-    console.log(mails);
+    // console.log(mails);
 }
 
 

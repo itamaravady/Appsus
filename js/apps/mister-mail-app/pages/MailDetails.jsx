@@ -19,7 +19,7 @@ export class MailDetails extends React.Component {
         const { mailId } = this.props.match.params
         console.log('mailId in mailDeatails', mailId);
         mailService.getById(mailId).then(mail => {
-            if (!mail) return this.props.history.push('/mail')
+            // if (!mail) return this.props.history.push('/mail/compose')
             this.setState({ mail })
         })
     }
@@ -38,7 +38,7 @@ export class MailDetails extends React.Component {
     }
     render() {
         const { mail } = this.state
-        if (!mail) return <Loader />
+        // if (!mail) return <Loader />
         console.log(mail);
 
             return (

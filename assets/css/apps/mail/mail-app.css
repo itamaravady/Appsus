@@ -1,15 +1,16 @@
 .mail-app .compose-btn {
-  transform: scale(1);
-  border-radius: 0;
-  /* height: 50px; */
-  margin: 0;
+  display: flex;
   width: 100%;
   padding: 5px;
   background-color: rgb(255, 255, 255);
   font-size: 24px;
 }
 
+.mail-app .compose-btn:hover{
+  background-color: rgb(201, 197, 197);
+}
+
 .side-by-side {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+  display: flex;
+  
 }

@@ -10,7 +10,7 @@ export class BookAdd extends React.Component {
     }
 
     handleChange = ({ target }) => {
-        console.log('handling change', target.value);
+        // console.log('handling change', target.value);
         const field = target.name
         const value = target.value;
         this.setState({ [field]: value })
