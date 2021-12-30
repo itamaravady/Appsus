@@ -1,0 +1,28 @@
+.user-msg {
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  padding: 1rem 1.5rem;
+  transform: translate(100%, 0);
+  background-color: aliceblue;
+  transition: all ease-in-out 0.3s;
+}
+
+.user-msg button {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  cursor: pointer;
+}
+
+.user-msg.open {
+  transform: translate(0, 0);
+}
+
+.user-msg.success {
+  background-color: rgb(119, 238, 179);
+}
+
+.user-msg.danger {
+  background-color: rgb(238, 119, 119);
+}

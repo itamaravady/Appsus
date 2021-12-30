@@ -3,7 +3,7 @@ import { MailList } from '../cmps/MailList.jsx'
 import { mailService } from '../services/mail.service.js'
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailCompose } from '../cmps/MailCompose.jsx'
-// import { MailAdd } from '../cmps/MailAdd.jsx'
+import { MailFolderList } from '../cmps/MailFolderList.jsx'
 
 // const { Link, Route } = ReactRouterDOM;
 
@@ -12,7 +12,9 @@ export class MailApp extends React.Component {
 
     state = {
         mails: [],
-        fiterBy: null,
+        filterBy: {
+            status: 'inbox',
+        },
         isShowComposeModal: false
     }
 
@@ -33,7 +35,6 @@ export class MailApp extends React.Component {
     };
 
     onAddMail = (mail) => {
-        console.log(mail);
         mailService.addMail(mail).then(() => {
             this.loadMails()
             this.onToggleComposeModal()
@@ -42,7 +43,12 @@ export class MailApp extends React.Component {
     }
 
     onSetFilter = (filterBy) => {
-        this.setState({ filterBy }, this.loadMails)
+        this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, ...filterBy } }), this.loadMails)
+    }
+
+    onAddStar = (mailId) => {
+        mailService.addStar(mailId)
+            .then(() => this.loadMails())
     }
 
     render() {
@@ -55,9 +61,9 @@ export class MailApp extends React.Component {
                     <div className="compose-container">
                         <button className="compose-btn" onClick={this.onToggleComposeModal}> <span>+</span> Compose</button>
                         {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} />}
-                        {/* <MailFolderList /> */}
+                        <MailFolderList onSetFilter={this.onSetFilter} />
                     </div>
-                    <MailList mails={mails} />
+                    <MailList mails={mails} onAddStar={this.onAddStar} />
                 </div>
             </section>
         )

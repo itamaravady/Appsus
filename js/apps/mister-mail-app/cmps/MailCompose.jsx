@@ -20,14 +20,14 @@ export class MailCompose extends React.Component {
 
     submit = (ev) => {
         ev.preventDefault()
-        this.setState((prevState) => ({ mail: { ...prevState.mail, ['isSend']: true, ['isDraft']: false } }), () => {
+        this.setState((prevState) => ({ mail: { ...prevState.mail, ['status']: 'sent' } }), () => {
             this.props.onAddMail(this.state.mail)
             eventBusService.emit('user-msg', { txt: 'Sent Mail !', type: this.state.mail, name: 'mail' })
         })
     }
 
     saveDraft = () => {
-        this.setState((prevState) => ({ mail: { ...prevState.mail, ['isSend']: false, ['isDraft']: true } }), () => {
+        this.setState((prevState) => ({ mail: { ...prevState.mail, ['status']: 'draft' } }), () => {
             this.props.onAddMail(this.state.mail)
         })
     }
