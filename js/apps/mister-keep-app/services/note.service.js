@@ -25,7 +25,7 @@ function _createNotes() {
                 type: 'txt',
                 isPinned: false,
                 info: {
-                    title: 'my poem',
+                    inputTxt: 'js is red, vue is blue, css is green and I love React.',
                     txt: 'js is red, vue is blue, css is green and I love React.',
                 },
                 style: {
@@ -38,8 +38,8 @@ function _createNotes() {
                 type: 'img',
                 isPinned: true,
                 info: {
-                    title: 'my image',
-                    imgUrl: 'https://ggsc.s3.amazonaws.com/images/made/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner_300_200_int_c1-1x.jpg',
+                    inputTxt: 'https://ggsc.s3.amazonaws.com/images/made/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner_300_200_int_c1-1x.jpg',
+                    img: 'https://ggsc.s3.amazonaws.com/images/made/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner_300_200_int_c1-1x.jpg',
                 },
                 style: {
                     backgroundColor: '#222',
@@ -51,8 +51,8 @@ function _createNotes() {
                 type: 'video',
                 isPinned: true,
                 info: {
-                    title: 'practice',
-                    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                    inputTxt: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                    video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                 },
             },
             {
@@ -60,11 +60,9 @@ function _createNotes() {
                 type: 'todos',
                 isPinned: false,
                 info: {
+                    inputTxt: 'buy bananas,get a haircut',
                     label: 'Personal',
-                    todos: [
-                        { txt: 'buy bananas', doneAt: null },
-                        { txt: 'get a haircut', doneAt: 187111111 },
-                    ]
+                    todos: 'buy bananas,get a haircut',
                 },
                 style: {
                     backgroundColor: '#222',
@@ -76,11 +74,9 @@ function _createNotes() {
                 type: 'todos',
                 isPinned: false,
                 info: {
+                    inputTxt: 'buy tomatoes,delete me',
                     label: 'Personal',
-                    todos: [
-                        { txt: 'buy tomatoes', doneAt: null },
-                        { txt: 'delete me', doneAt: 187111111 },
-                    ]
+                    todos: 'buy tomatoes,delete me',
                 },
                 style: {
                     backgroundColor: '#222',
@@ -113,48 +109,34 @@ function waitQuery(filterBy = null) {
     });
 }
 
-function addNote(inputText, noteType) {
+function addNote(inputText, noteType, noteId) {
     var notes = _loadNotesFromStorage();
+    if (noteId) {
+        getNoteById(noteId)
+            .then(note => {
+                note.info = { ...note.info, [noteType]: inputText, inputTxt: inputText }
+                const noteIdx = notes.findIndex(note => note.id === noteId)
+                notes.splice(noteIdx, 1, note);
+                console.log(notes);
+                _saveNotesToStorage(notes);
+                return Promise.resolve('');
+            });
+    } else {
 
-    var info;
-    switch (noteType) {
-        case 'txt':
-            info = {
-                title: 'title',
-                txt: inputText,
-            }
-            break;
-        case 'img':
-            info = {
-                imgUrl: inputText,
-            }
-            break;
-        case 'video':
-            info = {
-                videoUrl: inputText,
-            }
-        case 'todos':
-            var todos = inputText.split(',').map(todo => ({ txt: todo }))
-            info = {
-                title: 'New list',
-                todos,
-            }
-            break;
+        var note = {
+            id: utilService.makeId(),
+            type: noteType,
+            isPinned: false,
+            info: { [noteType]: inputText },
+            style: {
+                backgroundColor: '#fff',
+                font: 'ariel',
+            },
+        }
+        notes.push(note);
+        _saveNotesToStorage(notes);
+        return Promise.resolve('');
     }
-    console.log(inputText.split(','));
-    const note = {
-        id: utilService.makeId(),
-        type: noteType,
-        isPinned: false,
-        info,
-        style: {
-            backgroundColor: '#fff',
-            font: 'ariel',
-        },
-    }
-    notes.push(note);
-    _saveNotesToStorage(notes);
-    return Promise.resolve();
 }
 
 function removeNote(noteId) {

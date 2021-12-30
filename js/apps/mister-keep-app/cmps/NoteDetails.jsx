@@ -2,7 +2,7 @@ import { noteService } from "../services/note.service.js";
 const { NavLink, Route } = ReactRouterDOM;
 import { NoteForDisplay } from './NoteForDisplay.jsx'
 
-export class NoteEdit extends React.Component {
+export class NoteDetails extends React.Component {
     state = {
         note: null
     }
@@ -25,8 +25,8 @@ export class NoteEdit extends React.Component {
         console.log(note);
 
         return (
-            <div className="note-edit">
-                <NavLink className="clean-link" to={`/note/`}>
+            <div className="note-details-container">
+                <NavLink className="clean-link btn-close" to={`/note/`}>
                     X
                 </NavLink>
                 {note && <NoteForDisplay note={note} classes='note-details' />}

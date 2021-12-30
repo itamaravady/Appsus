@@ -1,10 +1,23 @@
 import { noteService } from "../services/note.service.js"
+import { eventBusService } from "../../../services/eventBusService.js"
 
 export class NoteAdd extends React.Component {
     state = {
-        inputText: '',
+        inputTxt: '',
         noteType: 'txt',
         placeHolder: 'Type note...',
+        noteId: null,
+    }
+    removeEventBus = null;
+
+    componentDidMount() {
+        this.removeEventBus = eventBusService.on('edit-note', (note) => {
+            this.setState({ inputTxt: note.info.inputTxt, noteType: note.type, noteId: note.id, });
+        })
+    }
+
+    componentWillUnmount() {
+        this.removeEventBus();
     }
 
     onChangeAddNoteType = ({ target }) => {
@@ -12,24 +25,24 @@ export class NoteAdd extends React.Component {
     }
 
     handleChange = ({ target }) => {
-        this.setState({ inputText: target.value });
+        this.setState({ inputTxt: target.value });
     }
 
     submit = (ev) => {
         ev.preventDefault();
-        const { inputText, noteType } = this.state;
-        noteService.addNote(inputText, noteType)
+        const { inputTxt: inputTxt, noteType, noteId } = this.state;
+        // const { inputTxt, noteType } = this.state;
+        noteService.addNote(inputTxt, noteType, noteId)
             .then(this.props.loadNotes());
     }
 
     render() {
-        const { placeHolder, noteType } = this.state;
-
+        const { placeHolder, noteType, inputTxt, noteId } = this.state;
         return (
 
             <section className="note-add">
                 <form onSubmit={this.submit}>
-                    <input type="text" autoComplete="off" placeholder={placeHolder} className="add-input" name="inputText" onChange={this.handleChange} value={this.state.inputText} />
+                    <input type="text" autoComplete="off" placeholder={placeHolder} className="add-input" name="inputTxt" onChange={this.handleChange} value={inputTxt} />
                 </form>
                 <div className="note-add-menu">
                     <button className={`note-add-btn ${noteType === 'txt' && 'active'}`} onClick={this.onChangeAddNoteType} name="txt">text</button>

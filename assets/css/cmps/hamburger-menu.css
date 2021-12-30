@@ -4,12 +4,12 @@
     background-color: #fff;
     position: absolute;
     top: 60px;
-    right: 87px;
+    right: 0;
     opacity: 0;
     transition: all 0.3s ease-in-out;
     pointer-events: none;
     z-index: 5;
-    box-shadow: 0 3px 8px 1px #afafaf;
+    box-shadow: 0 3px 8px 1px #00000050;
 }
 
 .nav-links.open {
