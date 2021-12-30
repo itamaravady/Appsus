@@ -3,6 +3,7 @@ import { noteService } from '../services/note.service.js'
 import { NoteMenu } from './NoteMenu.jsx'
 import { NoteDetails } from './NoteDetails.jsx'
 import { NoteForDisplay } from './NoteForDisplay.jsx'
+import { eventBusService } from '../../../services/eventBusService.js'
 
 
 const { NavLink, Route } = ReactRouterDOM;
@@ -14,6 +15,20 @@ export class NotePreview extends React.Component {
         isMenuHover: false,
     }
 
+    removeEventBus = null;
+
+    componentDidMount() {
+        this.removeEventBus = eventBusService.on('done-edit', (note) => {
+            if (note.id === this.state.note.id) this.setState({ note })
+        })
+    }
+
+
+    componentWillUnmount() {
+        this.removeEventBus();
+    }
+
+
     onRemove = () => {
         noteService.removeNote(this.state.note.id)
             .then(() => {
@@ -21,6 +36,10 @@ export class NotePreview extends React.Component {
             });
     }
 
+    onEdit = (note) => {
+        console.log('on edit', note);
+        eventBusService.emit('edit-note', note)
+    }
 
     toggleMenuBtns = () => {
         this.setState({ isMenuHover: !this.state.isMenuHover })
@@ -28,7 +47,7 @@ export class NotePreview extends React.Component {
 
     render() {
         const { note, isMenuHover } = this.state;
-        const { onEdit } = this.props
+
 
         return (
             <article
@@ -44,7 +63,7 @@ export class NotePreview extends React.Component {
                     classes={`note-menu ${isMenuHover && 'open'}`}
                     note={note}//?
                     onRemove={this.onRemove}
-                    onEdit={onEdit}
+                    onEdit={() => this.onEdit(note)}
                 />
             </article >
 

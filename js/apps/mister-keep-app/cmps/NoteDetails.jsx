@@ -8,21 +8,17 @@ export class NoteDetails extends React.Component {
     }
 
     componentDidMount() {
-        console.log("did mount");
         this.loadNote();
     }
 
     loadNote = () => {
-        console.log("did load");
         const { noteId } = this.props.match.params
-        noteService.getNoteById(noteId)
-            .then((note) => {
-                this.setState({ note: note })
-            })
+        const note = noteService.getNoteById(noteId);
+        this.setState({ note })
+
     }
     render() {
         const { note } = this.state;
-        console.log(note);
 
         return (
             <div className="note-details-container">

@@ -14,12 +14,14 @@
 
 .note-add form {
     margin: 0;
-    /* padding: 0; */
-    /* height: 30px; */
+    flex-grow: 1;
+    padding: 0;
+    height: 100%;
 }
 
 .note-add form input {
     height: 100%;
+    width: 100%;
     border: none;
 }
 

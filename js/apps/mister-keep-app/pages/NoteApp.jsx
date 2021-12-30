@@ -17,7 +17,6 @@ export class NoteApp extends React.Component {
     }
 
     loadNotes = () => {
-        console.log('load notes!');
         const { filterBy } = this.state;
         noteService.waitQuery(filterBy)
             // noteService.query(filterBy)
@@ -30,9 +29,7 @@ export class NoteApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
-    onEdit = (note) => {
-        eventBusService.emit('edit-note', note)
-    }
+
 
     render() {
         const { notes } = this.state;
@@ -42,7 +39,6 @@ export class NoteApp extends React.Component {
                 {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
                 {!notes ? <Loader /> :
                     <NoteList
-                        onEdit={this.onEdit}
                         loadNotes={this.loadNotes}
                         notes={notes}
                     />

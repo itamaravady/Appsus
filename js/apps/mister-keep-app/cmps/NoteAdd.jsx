@@ -1,5 +1,6 @@
 import { noteService } from "../services/note.service.js"
 import { eventBusService } from "../../../services/eventBusService.js"
+import { utilService } from "../../../services/util.service.js";
 
 export class NoteAdd extends React.Component {
     state = {
@@ -12,6 +13,7 @@ export class NoteAdd extends React.Component {
 
     componentDidMount() {
         this.removeEventBus = eventBusService.on('edit-note', (note) => {
+            console.log('bus:', note);
             this.setState({ inputTxt: note.info.inputTxt, noteType: note.type, noteId: note.id, });
         })
     }
@@ -31,13 +33,19 @@ export class NoteAdd extends React.Component {
     submit = (ev) => {
         ev.preventDefault();
         const { inputTxt: inputTxt, noteType, noteId } = this.state;
-        // const { inputTxt, noteType } = this.state;
+        console.log(noteId);
         noteService.addNote(inputTxt, noteType, noteId)
-            .then(this.props.loadNotes());
+            .then((note) => {
+
+                if (note) eventBusService.emit('done-edit', note);
+                else this.props.loadNotes();
+                // this.props.loadNotes();
+
+            });
     }
 
     render() {
-        const { placeHolder, noteType, inputTxt, noteId } = this.state;
+        const { placeHolder, noteType, inputTxt } = this.state;
         return (
 
             <section className="note-add">

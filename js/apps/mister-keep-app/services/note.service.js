@@ -110,34 +110,38 @@ function waitQuery(filterBy = null) {
 }
 
 function addNote(inputText, noteType, noteId) {
+    console.log(noteId)
     var notes = _loadNotesFromStorage();
     if (noteId) {
-        getNoteById(noteId)
-            .then(note => {
-                note.info = { ...note.info, [noteType]: inputText, inputTxt: inputText }
-                const noteIdx = notes.findIndex(note => note.id === noteId)
-                notes.splice(noteIdx, 1, note);
-                console.log(notes);
-                _saveNotesToStorage(notes);
-                return Promise.resolve('');
-            });
+        var note = notes.find(note => note.id === noteId)
+        note.info = { ...note.info, [noteType]: inputText, inputTxt: inputText }
+        const noteIdx = notes.findIndex(note => note.id === noteId)
+        notes.splice(noteIdx, 1, note);
+        _saveNotesToStorage(notes);
+        return Promise.resolve(note);
     } else {
 
         var note = {
             id: utilService.makeId(),
             type: noteType,
             isPinned: false,
-            info: { [noteType]: inputText },
+            info: {
+                inputTxt: inputText,
+                [noteType]: inputText
+            },
             style: {
                 backgroundColor: '#fff',
                 font: 'ariel',
             },
         }
+        console.log('add note else', note);
         notes.push(note);
         _saveNotesToStorage(notes);
-        return Promise.resolve('');
+        return Promise.resolve();
     }
 }
+
+
 
 function removeNote(noteId) {
     var notes = _loadNotesFromStorage();
@@ -157,11 +161,8 @@ function _getFilteredNotes(notes, filterBy) {
 function getNoteById(noteId) {
     const notes = _loadNotesFromStorage()
     // return new Promise.Resolve(notes.find(book => book.id === bookId));
-    return new Promise((resolve) => {
-        const note = notes.find(note => note.id === noteId);
-        // console.log(note);
-        resolve(note);
-    });
+    const note = notes.find(note => note.id === noteId);
+    return note;
 }
 
 function _saveNotesToStorage(notes) {
