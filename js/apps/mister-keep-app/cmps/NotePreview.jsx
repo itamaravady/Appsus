@@ -13,6 +13,7 @@ export class NotePreview extends React.Component {
         note: this.props.note,
         classes: null,
         isMenuHover: false,
+        isColorMenuOpen: false,
     }
 
     removeEventBus = null;
@@ -40,10 +41,36 @@ export class NotePreview extends React.Component {
         eventBusService.emit('edit-note', note)
     }
 
+    onDuplicate = () => {
+        noteService.duplicateNote(this.state.note)
+            .then(() => {
+                this.props.loadNotes();
+            });
+    }
+
+    onSetStyle = (newStyle) => {
+        var { style, id } = this.state.note;
+        style = { ...style, ...newStyle };
+        noteService.setNoteStyle(id, style)
+            .then(() => {
+                var note = this.state.note;
+                note.style = style;
+                this.setState({ note })
+            });
+    }
+
     toggleMenuBtns = (action) => {
-        if (action === 'hide') this.setState({ isMenuHover: false });
+        if (action === 'hide') {
+            this.setState({ isMenuHover: false, isColorMenuOpen: false });
+        }
         else this.setState({ isMenuHover: true });
     }
+
+    toggleColorMenu = () => {
+        this.setState({ isColorMenuOpen: !this.state.isColorMenuOpen });
+    }
+
+    getIsColorMenuOpen = () => this.state.isColorMenuOpen
 
     render() {
         const { note, isMenuHover } = this.state;
@@ -54,8 +81,9 @@ export class NotePreview extends React.Component {
                 className={`note-preview-container `}
                 onMouseEnter={this.toggleMenuBtns}
                 onMouseLeave={() => this.toggleMenuBtns('hide')}
+                style={{ backgroundColor: this.state.note.style.backgroundColor }}
             >
-                <Route component={NoteDetails} path="/note/:noteId" />
+                <Route render={(props) => (<NoteDetails {...props} parentNoteId={note.id} />)} path="/note/:noteId" />
                 <NavLink className="clean-link" to={`/note/${note.id}`}>
                     <NoteForDisplay note={note} classes="note-preview" />
                 </NavLink>
@@ -64,6 +92,10 @@ export class NotePreview extends React.Component {
                     note={note}//?
                     onRemove={this.onRemove}
                     onEdit={() => this.onEdit(note)}
+                    onDuplicate={this.onDuplicate}
+                    onSetStyle={this.onSetStyle}
+                    toggleColorMenu={this.toggleColorMenu}
+                    getIsColorMenuOpen={this.getIsColorMenuOpen}
                 />
             </article >
 

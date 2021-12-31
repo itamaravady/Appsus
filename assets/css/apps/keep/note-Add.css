@@ -29,9 +29,27 @@
     outline: none;
 }
 
+.note-add .note-add-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .note-add .note-add-menu .btn-note-add {
     width: 23px;
     filter: invert(78%) sepia(0%) saturate(1480%) hue-rotate(168deg) brightness(83%) contrast(78%);
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-img {
+    width: 30px;
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-video {
+    width: 26px;
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-todos {
+    width: 26px;
 }
 
 .note-add .note-add-menu .btn-note-add:hover {

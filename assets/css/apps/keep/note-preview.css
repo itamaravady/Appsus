@@ -3,8 +3,11 @@
     border: 1px solid rgb(182, 182, 182);
     border-radius: 8px;
     padding: 10px;
-    align-self: start;
+    margin-block-end: 15px;
     font-size: 1.2rem;
+    break-inside: avoid;
+    break-after: avoid;
+    break-before: avoid-column;
 }
 
 .note-preview-container:hover {
@@ -52,6 +55,10 @@
 
 .note-menu img.btn-note-bgc {
     width: 17px;
-    /* margin-inline-end: 3px;
-    cursor: pointer; */
+}
+
+.btns-note-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

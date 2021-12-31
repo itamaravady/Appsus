@@ -7,7 +7,8 @@ export const noteService = {
     removeNote,
     addNote,
     getNoteById,
-
+    setNoteStyle,
+    duplicateNote,
 }
 
 const KEY = 'noteDB';
@@ -42,7 +43,7 @@ function _createNotes() {
                     img: 'https://ggsc.s3.amazonaws.com/images/made/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner_300_200_int_c1-1x.jpg',
                 },
                 style: {
-                    backgroundColor: '#222',
+                    backgroundColor: '#61e8e1',
                     font: 'impact',
                 }
             },
@@ -54,6 +55,10 @@ function _createNotes() {
                     inputTxt: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                     video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
                 },
+                style: {
+                    backgroundColor: '#f25757',
+                    font: 'impact',
+                }
             },
             {
                 id: utilService.makeId(),
@@ -65,7 +70,7 @@ function _createNotes() {
                     todos: 'buy bananas,get a haircut',
                 },
                 style: {
-                    backgroundColor: '#222',
+                    backgroundColor: '#f2e863',
                     font: 'impact',
                 }
             },
@@ -79,7 +84,7 @@ function _createNotes() {
                     todos: 'buy tomatoes,delete me',
                 },
                 style: {
-                    backgroundColor: '#222',
+                    backgroundColor: '#f2cd60',
                     font: 'impact',
                 }
             },
@@ -113,7 +118,9 @@ function addNote(inputText, noteType, noteId) {
     var notes = _loadNotesFromStorage();
     if (noteId) {
         var note = notes.find(note => note.id === noteId)
+
         note.info = { ...note.info, [noteType]: inputText, inputTxt: inputText }
+
         const noteIdx = notes.findIndex(note => note.id === noteId)
         notes.splice(noteIdx, 1, note);
         _saveNotesToStorage(notes);
@@ -139,17 +146,39 @@ function addNote(inputText, noteType, noteId) {
     }
 }
 
+function duplicateNote(note) {
+    var notes = _loadNotesFromStorage();
+    const duplicateNote = JSON.parse(JSON.stringify(note))
+    duplicateNote.id = utilService.makeId();
+    notes.push(duplicateNote);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+function setNoteStyle(noteId, newStyle) {
+    var notes = _loadNotesFromStorage();
+    const noteIdx = _getNoteIndexById(noteId);
+    for (var styleType in newStyle) {
+        notes[noteIdx].style = { ...notes[noteIdx].style, [styleType]: newStyle[styleType] }
+    }
+    _saveNotesToStorage(notes);
+    return Promise.resolve()
+}
+
 
 
 function removeNote(noteId) {
+    const noteIdxToRemove = _getNoteIndexById(noteId);
     var notes = _loadNotesFromStorage();
-    const noteIdxToRemove = notes.findIndex(note => note.id === noteId);
     notes.splice(noteIdxToRemove, 1);
     _saveNotesToStorage(notes);
     return Promise.resolve();
 }
 
-
+function _getNoteIndexById(noteId) {
+    var notes = _loadNotesFromStorage();
+    return notes.findIndex(note => note.id === noteId);
+}
 
 function _getFilteredNotes(notes, filterBy) {
     //todo!

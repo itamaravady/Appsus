@@ -1,0 +1,16 @@
+.color-picker {
+    background-color: rgba(184, 184, 184, 0.678);
+    border-radius: 4px;
+    /* display: none; */
+    position: absolute;
+    display: flex;
+    padding: 10px;
+    gap: 5px;
+}
+
+.btn-color-pick {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    /* background-color: red; */
+}

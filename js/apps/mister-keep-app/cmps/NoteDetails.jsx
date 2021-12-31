@@ -19,13 +19,16 @@ export class NoteDetails extends React.Component {
     }
     render() {
         const { note } = this.state;
-
+        const { parentNoteId } = this.props
+        const isSelectedNote = note && parentNoteId === note.id;
         return (
-            <div className="note-details-container">
-                <NavLink className="clean-link btn-close" to={`/note/`}>
-                    <img className="btn-close" src="../../assets/svg/x.svg" />
-                </NavLink>
-                {note && <NoteForDisplay note={note} classes='note-details' />}
+            <div>{isSelectedNote &&
+                <div style={{ backgroundColor: note.style.backgroundColor }} className="note-details-container">
+                    <NavLink className="clean-link btn-close" to={`/note/`}>
+                        <img className="btn-close" src="../../assets/svg/x.svg" />
+                    </NavLink>
+                    {note && <NoteForDisplay note={note} classes='note-details' />}
+                </div>}
             </div>
         )
     }

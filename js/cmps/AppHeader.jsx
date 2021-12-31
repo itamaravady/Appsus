@@ -20,7 +20,7 @@ export class AppHeader extends React.Component {
                     <NavLink exact className="clean-link" to="/"><h1 className="seconday-header">Appsus</h1></NavLink>
                     {/* <h2>Appsus</h2> */}
 
-                    <img src="../../../assets/svg/hamburger.svg" onMouseOver={this.toggleMenu} />
+                    <img src="/assets/svg/hamburger.svg" onMouseOver={this.toggleMenu} />
                     {<HamburgerMenu onLeave={() => this.toggleMenu('hide')} classes={classes} />}
                 </header>
             </section>

@@ -8,8 +8,8 @@
     gap: 10px;
     background-color: #fff;
     position: absolute;
-    top: 60px;
-    right: 0;
+    top: 62px;
+    right: 6px;
     opacity: 0;
     transition: all 0.3s ease-in-out;
     pointer-events: none;
