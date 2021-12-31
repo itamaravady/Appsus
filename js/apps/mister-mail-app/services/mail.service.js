@@ -149,24 +149,25 @@ function addGoogleBook(googleBook) {
 function addMail(newMail) {
     let mails = _loadFromStorage()
 
-    if (newMail.status === 'draft') {
+    console.log(newMail);
+    if (newMail.status === 'sent') {
         console.log(newMail);
         let selectedMail = mails.find(mail => mail.id === newMail.id)
-        selectedMail.status = 'sent'
-
-        _saveToStorage(mails)
-        return Promise.resolve()
+        if (selectedMail) {
+            selectedMail.status = 'sent'
+            _saveToStorage(mails)
+            return Promise.resolve()
+        }
     }
 
-    const mail = {
+    let mail = {
         ...newMail,
         id: utilService.makeId(),
         from: gLoggedinUser.fullname,
         fromMail: gLoggedinUser.email,
         sentAt: Date.now(),
-        status: (newMail.status = newMail.status) ? newMail.status : 'draft'
     }
-
+    // if (newMail.status === 'toSent') mail['status'] = 'sent'
 
     mails = [mail, ...mails]
     _saveToStorage(mails)

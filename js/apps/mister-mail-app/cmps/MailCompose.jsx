@@ -17,6 +17,7 @@ export class MailCompose extends React.Component {
 
     componentDidMount() {
         this.loadDraft()
+        console.log(this.props);
 
     }
 
@@ -38,8 +39,9 @@ export class MailCompose extends React.Component {
 
     saveDraft = () => {
         if (this.state.mail.status) return this.props.onToggleComposeModal()
-        this.props.onAddMail(this.state.mail)
-
+        this.setState((prevState) => ({ mail: { ...prevState.mail, ['status']: 'draft' } }), () => {
+            this.props.onAddMail(this.state.mail)
+        })
 
     }
 
