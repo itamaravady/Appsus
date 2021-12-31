@@ -16,6 +16,7 @@ export class MailApp extends React.Component {
         filterBy: {
             status: 'inbox',
         },
+        isShowComposeModal: false
     }
 
     componentDidMount() {
@@ -31,7 +32,8 @@ export class MailApp extends React.Component {
     }
 
     onToggleComposeModal = () => {
-        this.props.history.push('/mail')
+        this.setState({ isShowComposeModal: !this.state.isShowComposeModal })
+        // this.props.history.push('/mail')
     };
 
     onAddMail = (mail) => {
@@ -57,24 +59,24 @@ export class MailApp extends React.Component {
     }
 
     render() {
-        const { mails } = this.state
+        const { mails, isShowComposeModal } = this.state
         if (!mails) return
         return (
-            <section className="mail-app">
+            <section className="mail-app main-layout">
                 <MailFilter onSetFilter={this.onSetFilter} />
                 <div className="side-by-side">
                     <div className="side-folder">
-                        <Link className="compose-btn clean-link" to="/mail/compose"> <span>+</span> Compose</Link>
+                        <Link className="compose-btn clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span>+</span> Compose</Link>
                         <MailFolderList onSetFilter={this.onSetFilter} />
                     </div>
                     <React.Fragment>
                         <Switch>
                             <Route render={(props) => <MailDetails loadMails={this.loadMails} {...props} />} path="/mail/:mailId" />
-                        <Route render={(props) => <MailList mails={mails} onAddStar={this.onAddStar} onToggleComposeModal={this.onToggleComposeModal} {...props} />} path="/mail" />
+                            <Route render={(props) => <MailList mails={mails} onAddStar={this.onAddStar} onToggleComposeModal={this.onToggleComposeModal} loadMails={this.loadMails} {...props} />} path="/mail" />
                         </Switch>
                     </React.Fragment>
-                            <Route render={(props) => <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail = {this.onRemoveMail} {...props} />} path="/mail/compose/:mailId?" />
-                    {/* <MailList mails={mails} onAddStar={this.onAddStar} onToggleComposeModal={this.onToggleComposeModal} /> */}
+                    {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail={this.onRemoveMail} />}
+                    {/* <Route render={(props) => <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail = {this.onRemoveMail} {...props} />} path="/mail/compose/:mailId?" /> */}
 
                 </div>
             </section>

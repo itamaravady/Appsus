@@ -30,7 +30,7 @@ export class BookDetails extends React.Component {
         const isLongTxtShown = this.state.isLongTxtShown;
         if (!book) return <Loader />
         return (
-            <section>
+            <section className="main-layout">
                 <section className="book-details-container" >
                     <div className="img-container">
                         <img src={book.thumbnail} />

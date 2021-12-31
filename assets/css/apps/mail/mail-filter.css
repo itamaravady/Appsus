@@ -13,6 +13,10 @@
   border: none;
 }
 
+.search-mail-input:focus{
+  outline: none;
+}
+
 .mail-filter select {
   height: 41px;
   border: none;

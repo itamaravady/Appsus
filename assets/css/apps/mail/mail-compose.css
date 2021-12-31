@@ -1,64 +1,70 @@
-.mail-compose-section{
-    position: fixed;
-    z-index: 5;
-    bottom: 0;
-    right: 3%;
-    height: 70vh;
-    width: 80vh;
-    background-color: white;
+.mail-compose-section {
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  right: 3%;
+  height: 70vh;
+  width: 80vh;
+  background-color: white;
 }
 
-.new-mail-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(48, 47, 47);
-    color: white;
-    padding: 10px;
+.new-mail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(48, 47, 47);
+  color: white;
+  padding: 10px;
 }
 
-.new-mail-header span{
-    font-size: 18px;
-    cursor: pointer;
+.new-mail-header span {
+  font-size: 18px;
+  cursor: pointer;
 }
 
-.new-mail-form{
-    color: rgb(170, 169, 169);
-    font-weight: bold;
-    height: 85%;
-    font-size: 14px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 10px;
-    display: grid;
-    grid-template-rows: 40px 40px 1fr auto;
-    gap: 10px;
+.new-mail-form {
+  color: rgb(170, 169, 169);
+  font-weight: bold;
+  height: 85%;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 10px;
+  display: grid;
+  grid-template-rows: 40px 40px 1fr auto;
+  gap: 10px;
 }
 
-.new-mail-form input, .new-mail-form textarea{
-    border:none;
+.new-mail-form input,
+.new-mail-form textarea {
+  border: none;
 }
 
-.new-mail-form textarea{
-    resize: none;
+.new-mail-form input:focus,
+.new-mail-form textarea:focus {
+  outline: none;
 }
 
-.new-mail-form label{
-    padding-bottom: 10px;
-    border-bottom: 1px solid black;
+.new-mail-form textarea {
+  resize: none;
 }
 
-.options-new-mail img{
-    height: 30px;
-    cursor: pointer;
+.new-mail-form label {
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
 }
 
-.new-mail-form input{
-    width: 85%;
-    height: 100%;
+.options-new-mail img {
+  height: 30px;
+  cursor: pointer;
 }
 
-.options-new-mail{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.new-mail-form input {
+  width: 85%;
+  height: 100%;
+}
+
+.options-new-mail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

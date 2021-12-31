@@ -24,7 +24,7 @@ export function App() {
         <Router>
             <section className="app">
                 <AppHeader />
-                <main className="main-layout" >
+                <main>
                     <Switch>
                         {/* books */}
                         <Route component={BookDetails} path="/book/:bookId" />

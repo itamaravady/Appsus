@@ -5,7 +5,7 @@ const { Link } = ReactRouterDOM
 
 
 
-export function MailPreview({ mail, onAddStar, onToggleComposeModal }) {
+export function MailPreview({ mail, onAddStar, onToggleComposeModal, loadMails }) {
 
     function getShortBody() {
         if (mail.body.length > 30) {
@@ -29,8 +29,9 @@ export function MailPreview({ mail, onAddStar, onToggleComposeModal }) {
         return `${hour}:${minutes} AM`
     }
 
-    function changeReadMail() {
-        mailService.changeReadMail(mail.id)
+    function changeReadMail(isManual) {
+        mailService.changeReadMail(mail.id, isManual)
+            .then(() => loadMails())
     }
 
     function toggleStar(mailId) {
@@ -44,9 +45,12 @@ export function MailPreview({ mail, onAddStar, onToggleComposeModal }) {
     return (
         <section>
             < article className="mail-preview" >
-                <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
-                <Link onClick={mail.status !== 'draft' ? changeReadMail : getDraftMail} className="clean-link"
-                    to={mail.status !== 'draft' ? `/mail/${mail.id}` : `/mail/compose/${mail.id}`}>
+                <div className="actions-mail-preview-btns">
+                    {mail.status === 'inbox' && <button onClick={() => { changeReadMail(true) }}><img src={mail.isRead ? "assets/img/email-img/read.png" : "assets/img/email-img/unread.png"} /></button>}
+                    <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
+                </div>
+                <Link onClick={mail.status !== 'draft' ? () => { changeReadMail(false) } : getDraftMail} className="clean-link"
+                    to={mail.status !== 'draft' ? `/mail/${mail.id}` : `/mail?mailId=${mail.id}`}>
                     <ul className="list-info-mail clean-list">
                         <li>{mail.from}</li>
                         <div className="body-title-container">
