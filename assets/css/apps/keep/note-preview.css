@@ -43,3 +43,15 @@
 .note-menu.open {
     opacity: 1;
 }
+
+.note-menu img {
+    width: 15px;
+    margin-inline-end: 4px;
+    cursor: pointer;
+}
+
+.note-menu img.btn-note-bgc {
+    width: 17px;
+    /* margin-inline-end: 3px;
+    cursor: pointer; */
+}

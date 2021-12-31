@@ -23,7 +23,7 @@ export class NoteDetails extends React.Component {
         return (
             <div className="note-details-container">
                 <NavLink className="clean-link btn-close" to={`/note/`}>
-                    X
+                    <img className="btn-close" src="../../assets/svg/x.svg" />
                 </NavLink>
                 {note && <NoteForDisplay note={note} classes='note-details' />}
             </div>

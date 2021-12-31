@@ -8,8 +8,8 @@ export class AppHeader extends React.Component {
         classes: null,
         isMenuOpen: false,
     }
-    toggleMenu = () => {
-        if (this.state.classes) this.setState({ classes: null });
+    toggleMenu = (action) => {
+        if (action === 'hide') this.setState({ classes: null });
         else this.setState({ classes: 'open' });
     }
     render() {
@@ -17,9 +17,11 @@ export class AppHeader extends React.Component {
         return (
             <section className="header-container">
                 <header className="app-header main-layout">
-                    <h1 className="seconday-header">Appsus</h1>
-                    <button onClick={this.toggleMenu}>H</button>
-                    {<HamburgerMenu onLeave={this.toggleMenu} classes={classes} />}
+                    <NavLink exact className="clean-link" to="/"><h1 className="seconday-header">Appsus</h1></NavLink>
+                    {/* <h2>Appsus</h2> */}
+
+                    <img src="../../../assets/svg/hamburger.svg" onMouseOver={this.toggleMenu} />
+                    {<HamburgerMenu onLeave={() => this.toggleMenu('hide')} classes={classes} />}
                 </header>
             </section>
         )

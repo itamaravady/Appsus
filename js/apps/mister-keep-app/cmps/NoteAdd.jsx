@@ -56,10 +56,10 @@ export class NoteAdd extends React.Component {
                     <input type="text" autoComplete="off" placeholder={placeHolder} className="add-input" name="inputTxt" onChange={this.handleChange} value={inputTxt} />
                 </form>
                 <div className="note-add-menu">
-                    <button className={`note-add-btn ${noteType === 'txt' && 'active'}`} onClick={this.onChangeAddNoteType} name="txt">text</button>
-                    <button className={`note-add-btn ${noteType === 'img' && 'active'}`} onClick={this.onChangeAddNoteType} name="img">image</button>
-                    <button className={`note-add-btn ${noteType === 'video' && 'active'}`} onClick={this.onChangeAddNoteType} name="video">video</button>
-                    <button className={`note-add-btn ${noteType === 'todos' && 'active'}`} onClick={this.onChangeAddNoteType} name="todos">list</button>
+                    <img src="../../../assets/svg/note/txt.svg" className={`btn-note-add ${noteType === 'txt' && 'active'}`} onClick={this.onChangeAddNoteType} name="txt" />
+                    <img src="../../../assets/svg/note/image.svg" className={`btn-note-add ${noteType === 'img' && 'active'}`} onClick={this.onChangeAddNoteType} name="img" />
+                    <img src="../../../assets/svg/note/video.svg" className={`btn-note-add ${noteType === 'video' && 'active'}`} onClick={this.onChangeAddNoteType} name="video" />
+                    <img src="../../../assets/svg/note/todo.svg" className={`btn-note-add ${noteType === 'todos' && 'active'}`} onClick={this.onChangeAddNoteType} name="todos" />
                 </div>
 
             </section>

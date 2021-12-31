@@ -6,9 +6,9 @@ export function Home() {
             <div className="home-title">
                 <h2>Appsus</h2>
             </div>
-            <NavLink to="/mail/" className="clean-link"><button>Mister Email</button></NavLink>
-            <NavLink to="/note/" className="clean-link"><button>Mister Keep</button></NavLink>
-            <NavLink to="/book/" className="clean-link"><button>Miss Books</button></NavLink>
+            <NavLink className="clean-link" to="/mail/"> <img src="../../assets/img/mail.png" /></NavLink>
+            <NavLink className="clean-link" to="/note/"> <img src="../../assets/img/notes.png" /></NavLink>
+            <NavLink className="clean-link" to="/book/"> <img src="../../assets/img/books.png" /></NavLink>
         </div>
     )
 }

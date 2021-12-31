@@ -1,3 +1,24 @@
+.note-details-container {
+    padding: 25px;
+    background-color: white;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    border-radius: 4px;
+    box-shadow: 0 0px 5px 1px rgba(0, 0, 0, 0.116);
+}
+
+.note-details-container .btn-close {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    height: 12px;
+    width: 12px;
+}
+
+
 .note-details .note-title {
     margin-block-end: 10px;
 }

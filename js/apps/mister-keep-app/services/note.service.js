@@ -110,7 +110,6 @@ function waitQuery(filterBy = null) {
 }
 
 function addNote(inputText, noteType, noteId) {
-    console.log(noteId)
     var notes = _loadNotesFromStorage();
     if (noteId) {
         var note = notes.find(note => note.id === noteId)
@@ -134,7 +133,6 @@ function addNote(inputText, noteType, noteId) {
                 font: 'ariel',
             },
         }
-        console.log('add note else', note);
         notes.push(note);
         _saveNotesToStorage(notes);
         return Promise.resolve();

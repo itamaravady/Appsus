@@ -40,8 +40,9 @@ export class NotePreview extends React.Component {
         eventBusService.emit('edit-note', note)
     }
 
-    toggleMenuBtns = () => {
-        this.setState({ isMenuHover: !this.state.isMenuHover })
+    toggleMenuBtns = (action) => {
+        if (action === 'hide') this.setState({ isMenuHover: false });
+        else this.setState({ isMenuHover: true });
     }
 
     render() {
@@ -52,7 +53,7 @@ export class NotePreview extends React.Component {
             <article
                 className={`note-preview-container `}
                 onMouseEnter={this.toggleMenuBtns}
-                onMouseLeave={this.toggleMenuBtns}
+                onMouseLeave={() => this.toggleMenuBtns('hide')}
             >
                 <Route component={NoteDetails} path="/note/:noteId" />
                 <NavLink className="clean-link" to={`/note/${note.id}`}>
