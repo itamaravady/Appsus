@@ -33,6 +33,7 @@ export class MailDetails extends React.Component {
         mailService.remove(id).then(() => {
             eventBusService.emit('user-msg', { txt: 'Deleted mail !', type: this.state.mail, name: 'mail' })
             this.onBack()
+            this.props.loadMails()
         }
         )
     }

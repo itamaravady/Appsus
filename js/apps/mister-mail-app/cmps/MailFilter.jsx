@@ -36,6 +36,7 @@ export class MailFilter extends React.Component {
         const { filterBy: { txt, isRead } } = this.state
         return (
             <form className="mail-filter" onSubmit={this.onSubmitFilter}>
+                <div className="main-filter">
                 <button className="mail-filter-btn" type="submit">🔍</button>
                 <input type="search" name="txt" className="search-mail-input" placeholder="Search..." value={txt} onChange={this.handleChange} />
                 <select name="isRead" onChange={this.handleChange}>
@@ -43,6 +44,7 @@ export class MailFilter extends React.Component {
                     <option value={true}>Read</option>
                     <option value={false}>Unread</option>
                 </select>
+                </div>
             </form>
         )
     }
