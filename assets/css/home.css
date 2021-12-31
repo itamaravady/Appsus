@@ -1,29 +1,42 @@
 .home {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 5rem;
     align-items: center;
     height: 90vh;
     width: 100vw;
-    background-image: url('../img/hero.jpg');
     background-size: cover;
+    background-image: url('../img/hero2.jpg');
 }
 
-.home h2{
+.home h2 {
+
     color: rgb(255, 255, 255);
-    font-size: 30px;
+    font-size: 3.5rem;
     text-shadow: 0px 2px 20px #000000;
+    font-family: FredokaOne-Regular;
+    font-weight: 400;
 }
 
 
-.home-links-container img  {
+.home-links-container {
     align-self: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1rem;
+}
+
+.home-links-container img {
+
+    align-self: center;
     transition: 0.3s;
-    object-fit: cover;
+    transform: scale(0.95);
+
+}
+
+.home-links-container a:not(:last-of-type) {
+    margin-inline-end: 20px;
 }
 
 .home-links-container img:hover {
-    transform: scale(1.05);
+    filter: brightness(115%);
+    transform: scale(1);
 }
