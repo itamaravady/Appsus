@@ -39,7 +39,7 @@ export class BookApp extends React.Component {
     render() {
         const booksToShow = this.state.books;
         return (
-            <section>
+            <section className="main-layout">
                 <BookAdd history={this.props.history} />
                 <BookFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
                 {!booksToShow.length && <Loader />}

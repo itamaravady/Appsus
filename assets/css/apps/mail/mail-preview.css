@@ -58,3 +58,21 @@
 .mail-preview button:hover {
   transform: scale(1.2);
 }
+
+.actions-mail-preview-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions-mail-preview-btns button{
+  height: 30px;
+  width: 30px;
+  margin: 0;
+  padding: 5px;
+}
+.actions-mail-preview-btns button img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}

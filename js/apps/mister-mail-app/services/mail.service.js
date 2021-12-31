@@ -4,14 +4,8 @@ import { utilService } from '../../../services/util.service.js'
 export const mailService = {
     getById,
     query,
-    add,
-    update,
     remove,
-    addReview,
-    removeReview,
-    addGoogleBook,
     addMail,
-    getNextPrevById,
     changeReadMail,
     addStar
 }
@@ -56,17 +50,6 @@ function _getFilteredMails(mails, filterBy) {
     }
 
     return txtFilteredMails
-    // if (isRead !== 'all') {
-    //     const filteredMails = txtFilteredMails.filter(mail => {
-    //         return mail.isRead === isRead && mail.status === 'inbox'
-    //     })
-    //     return filteredMails
-    // } else {
-    //     const filteredMails = txtFilteredMails.filter(mail => {
-    //         return mail.status === 'inbox'
-    //     })
-    //     return filteredMails
-    // }
 }
 
 function addStar(mailId) {
@@ -78,73 +61,11 @@ function addStar(mailId) {
 }
 
 function getById(mailId) {
-    // console.log('hi');
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mailId === mail.id)
     return Promise.resolve(mail)
 }
 
-function getNextPrevById(bookId, diff) {
-    const books = _loadFromStorage()
-    const bookIdx = books.findIndex(book => bookId === book.id)
-    let nextBookIdx = bookIdx + diff
-    const book = books[nextBookIdx]
-    if (nextBookIdx === -1) return books[nextBookIdx + 1].id
-    else if (nextBookIdx === books.length) return books[0].id
-    return book.id
-}
-
-function addReview(bookId, review) {
-    const books = _loadFromStorage()
-
-    const book = books.find(book => book.id === bookId)
-    if (!review.date) {
-        const date = new Date()
-        review.date = (date.getMonth() + 1) + '/' + date.getFullYear()
-    }
-
-    if (!review.stars) {
-        review.stars = 1
-    }
-    review['id'] = utilService.makeId()
-    book.reviews = [review, ...book.reviews]
-    _saveToStorage(books)
-    return Promise.resolve()
-}
-
-function removeReview(reviewId, bookId) {
-    const books = _loadFromStorage()
-    const book = books.find(book => book.id === bookId)
-    book.reviews = book.reviews.filter(review => review.id !== reviewId)
-    _saveToStorage(books)
-    return Promise.resolve()
-}
-
-function addGoogleBook(googleBook) {
-    gBooks = storageService.load(GOOGLEKEY) || {}
-    if (gBooks[googleBook]) {
-        console.log('FROM CACHE');
-        return Promise.resolve(gBooks[googleBook])
-    }
-
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${googleBook}`)
-        .then(res => {
-            const books = res.data.items.filter((book, idx) => {
-                if (idx >= 5) return
-                return book
-            }
-            )
-            gBooks[googleBook] = books
-            storageService.save(GOOGLEKEY, gBooks)
-            return books
-        }
-        )
-        .catch(err => {
-            console.log('Cannot get ans', err);
-            throw err
-        })
-
-}
 
 function addMail(newMail) {
     let mails = _loadFromStorage()
@@ -181,21 +102,6 @@ function remove(mailId) {
     return Promise.resolve()
 }
 
-function add(vendor, speed) {
-    var cars = _loadFromStorage()
-    const car = _createCar(vendor, speed)
-    cars = [car, ...cars]
-    _saveToStorage(cars)
-    return Promise.resolve(car)
-}
-
-function update(carId, maxSpeed) {
-    var cars = _loadFromStorage()
-    var car = cars.find(car => car.id === carId)
-    car = { ...car, maxSpeed }
-    _saveToStorage(cars)
-    return Promise.resolve(car)
-}
 
 function _createMails() {
     const mails = _loadFromStorage()
@@ -206,12 +112,15 @@ function _createMails() {
     }
 }
 
-function changeReadMail(mailId) {
+function changeReadMail(mailId, isManual) {
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mail.id === mailId)
-    mail.isRead = true
+    console.log(isManual);
+    if (isManual) mail.isRead = !mail.isRead
+    else if (!isManual) mail.isRead = true
     _saveToStorage(mails)
-    // console.log(mails);
+
+    return Promise.resolve()
 }
 
 

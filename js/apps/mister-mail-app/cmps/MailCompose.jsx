@@ -3,10 +3,10 @@ import { eventBusService } from '../../../services/eventBusService.js'
 import { mailService } from '../services/mail.service.js';
 
 
-const { Link } = ReactRouterDOM;
+const { Link, withRouter } = ReactRouterDOM;
 
 
-export class MailCompose extends React.Component {
+class _MailCompose extends React.Component {
     state = {
         mail: {
             to: '',
@@ -46,16 +46,18 @@ export class MailCompose extends React.Component {
     }
 
     loadDraft = () => {
-        const { mailId: id } = this.props.match.params
-        if (!id) return false
-        mailService.getById(id)
+        let urlParams = new URLSearchParams(this.props.location.search);
+        const mailId = urlParams.get("mailId")
+        if (!mailId) return false
+        mailService.getById(mailId)
             .then(mail => {
                 this.setState({ mail })
             })
     }
 
     onRemove = () => {
-        const { mailId } = this.props.match.params
+        const { id: mailId } = this.state.mail
+        console.log(mailId);
         if (mailId) this.props.onRemoveMail(mailId)
         this.props.onToggleComposeModal()
     }
@@ -85,3 +87,6 @@ export class MailCompose extends React.Component {
         )
     }
 }
+
+
+export const MailCompose = withRouter(_MailCompose)

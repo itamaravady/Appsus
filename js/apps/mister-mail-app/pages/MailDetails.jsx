@@ -1,7 +1,7 @@
 // import { LongTxt } from '../../../cmps/LongTxt.jsx'
 import { mailService } from '../services/mail.service.js'
-import { Loader } from '../../../cmps/Loader.jsx'
 import { eventBusService } from '../../../services/eventBusService.js'
+import { noteService } from '../../mister-keep-app/services/note.service.js'
 
 // const { Link } = ReactRouterDOM
 
@@ -37,25 +37,33 @@ export class MailDetails extends React.Component {
         }
         )
     }
+
+    onMakeNote = () => {
+        noteService.addMailToNotes(this.state.mail)
+            .then(() => {
+                eventBusService.emit('user-msg', { txt: 'Saved as note !', type: this.state.mail, name: 'mail' })
+                this.props.history.push('/note')
+            })
+    }
     render() {
         const { mail } = this.state
         // if (!mail) return <Loader />
         console.log(mail);
 
-            return (
-                <section className="details-section">
-                    <div className="mail-details-header">
-                        <h1>{mail.subject}</h1>
-                        <ul className="clean-list actions-list">
-                            <li onClick={this.onRemove}><img src="assets/img/email-img/trash.png" alt="" /></li>
-                            <li><img src="assets/img/email-img/reply.png" alt="" /></li>
-                            <li onClick={this.onBack}><img src="assets/img/email-img/back.png" alt="" /></li>
-                        </ul>
-                    </div>
-                    <h4>{mail.from} <small>{`<${mail.fromMail}>`}</small></h4>
-                    <p>{mail.body}</p>
-                </section>
-            )
+        return (
+            <section className="details-section">
+                <div className="mail-details-header">
+                    <h1>{mail.subject}</h1>
+                    <ul className="clean-list actions-list">
+                        <li onClick={this.onRemove}><img src="assets/img/email-img/trash.png" alt="" /></li>
+                        <li onClick={this.onMakeNote}><img src="assets/img/email-img/note.png" alt="" /></li>
+                        <li onClick={this.onBack}><img src="assets/img/email-img/back.png" alt="" /></li>
+                    </ul>
+                </div>
+                <h4>{mail.from} <small>{`<${mail.fromMail}>`}</small></h4>
+                <p>{mail.body}</p>
+            </section>
+        )
 
     }
 }

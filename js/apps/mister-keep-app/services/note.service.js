@@ -9,6 +9,7 @@ export const noteService = {
     getNoteById,
     setNoteStyle,
     duplicateNote,
+    addMailToNotes,
 }
 
 const KEY = 'noteDB';
@@ -190,6 +191,34 @@ function getNoteById(noteId) {
     // return new Promise.Resolve(notes.find(book => book.id === bookId));
     const note = notes.find(note => note.id === noteId);
     return note;
+}
+
+function addMailToNotes(mail) {
+    console.log(mail);
+    let notes = _loadNotesFromStorage(KEY) || [];
+    //should notes.length still be here
+
+    const mailToNote =
+    {
+        id: utilService.makeId(),
+        type: 'mail',
+        isPinned: false,
+        info: {
+            inputTxt: `From ${mail.from}: <${mail.fromMail}>,${mail.subject},${mail.body}`,
+            label: 'Mail',
+            mail: `From ${mail.from}: <${mail.fromMail}>,Title: ${mail.subject} ,Body: ${mail.body}`,
+        },
+        style: {
+            backgroundColor: '#fff',
+            font: 'arial',
+        }
+    }
+
+    notes = [mailToNote, ...notes]
+    _saveNotesToStorage(notes);
+
+    return Promise.resolve()
+
 }
 
 function _saveNotesToStorage(notes) {
