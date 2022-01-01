@@ -4,8 +4,9 @@
   bottom: 0;
   right: 3%;
   height: 60vh;
-  width: 55vh;
+  width: 45vh;
   background-color: white;
+  border: 1px solid #ede9e9;
 }
 
 .new-mail-header {
@@ -74,6 +75,13 @@
 }
 
 @media screen and (min-width: 450px) {
+  .mail-compose-section {
+    height: 60vh;
+    width: 65vh;
+  }
+}
+
+@media screen and (min-width: 650px) {
   .mail-compose-section {
     height: 70vh;
     width: 80vh;

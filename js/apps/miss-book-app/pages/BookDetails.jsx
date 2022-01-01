@@ -10,6 +10,7 @@ export class BookDetails extends React.Component {
     state = {
         book: null,
         isLongTxtShown: false,
+        isAddReview: false
     }
     componentDidMount() {
         this.loadBook();
@@ -25,6 +26,15 @@ export class BookDetails extends React.Component {
     onShowMore = () => {
         this.setState({ isLongTxtShown: !this.state.isLongTxtShown })
     }
+
+    onBack = () => {
+        this.props.history.push('/book')
+    }
+
+    checkIsAddReview = () => {
+        this.setState({ isAddReview: !this.state.isAddReview })
+    }
+
     render() {
         const { book } = this.state;
         const isLongTxtShown = this.state.isLongTxtShown;
@@ -47,12 +57,13 @@ export class BookDetails extends React.Component {
                             <h4>{_getBookArrivalDescription(book)}</h4>
                             <h4>{_getReadingLength(book)}</h4>
                             <h4>language: {book.language}</h4>
-                            <button>Back</button>
+                            <button onClick={this.onBack}>Back</button>
                         </section>
                     </article>
                 </section>
                 <section className="book-reviews">
-                    <ReviewAdd onAddReview={this.loadBook} book={this.state.book} />
+                    <button onClick={this.checkIsAddReview}>{this.state.isAddReview ? 'Close Review' : 'Add Review'}</button>
+                    {this.state.isAddReview && <ReviewAdd onAddReview={this.loadBook} book={this.state.book} />}
                     {this.state.book.reviews && <ReviewList book={this.state.book} />}
                 </section>
             </section>

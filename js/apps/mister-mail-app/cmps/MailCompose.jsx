@@ -1,4 +1,3 @@
-import { Loader } from '../../../cmps/Loader.jsx';
 import { eventBusService } from '../../../services/eventBusService.js'
 import { mailService } from '../services/mail.service.js';
 
@@ -17,8 +16,6 @@ class _MailCompose extends React.Component {
 
     componentDidMount() {
         this.loadDraft()
-        console.log(this.props);
-
     }
 
     handleChange = ({ target }) => {
@@ -57,7 +54,7 @@ class _MailCompose extends React.Component {
 
     onRemove = () => {
         const { id: mailId } = this.state.mail
-        console.log(mailId);
+        // console.log(mailId);
         if (mailId) this.props.onRemoveMail(mailId)
         this.props.onToggleComposeModal()
     }

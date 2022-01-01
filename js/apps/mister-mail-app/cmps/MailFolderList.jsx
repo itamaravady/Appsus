@@ -36,17 +36,17 @@ export class MailFolderList extends React.Component {
         if (isStarred) isStarred = !isStarred
         this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [field]: value, isStarred } }), () => {
             this.props.onSetFilter(this.state.filterBy)
+            this.props.onCloseNav()
         })
     }
 
     changeIsStarred = () => {
         let { isStarred } = this.state.filterBy
         const { filterBy } = this.state
-        console.log(isStarred);
         isStarred = true
         this.setState(({ filterBy: { ...filterBy, isStarred } }), () => {
             this.props.onSetFilter(this.state.filterBy)
-            console.log(this.state.filterBy);
+            this.props.onCloseNav()
         })
     }
 

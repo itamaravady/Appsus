@@ -16,13 +16,18 @@ export class MailFilter extends React.Component {
         let value = target.type === 'number' ? +target.value : target.value
         if (value === 'true') value = true
         if (value === 'false') value = false
-        this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [field]: value } })
-        )
+        this.setState((prevState) => ({ filterBy: { ...prevState.filterBy, [field]: value } }), () => {
+            if (field === 'isRead') {
+                this.props.onSetFilter(this.state.filterBy)
+                this.props.onGoBack()
+            }
+        })
     }
 
     onSubmitFilter = (ev) => {
         ev.preventDefault()
         this.props.onSetFilter(this.state.filterBy)
+        this.props.onGoBack()
         this.cleanForm()
     }
 

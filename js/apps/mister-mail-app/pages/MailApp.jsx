@@ -34,7 +34,6 @@ export class MailApp extends React.Component {
 
     onToggleComposeModal = () => {
         this.setState({ isShowComposeModal: !this.state.isShowComposeModal })
-        // this.props.history.push('/mail')
     };
 
     onAddMail = (mail) => {
@@ -59,9 +58,17 @@ export class MailApp extends React.Component {
             .then(() => this.loadMails())
     }
 
+    onCloseNav = () => {
+        return this.setState({ navClassList: '' })
+    }
+
+    onGoBack = () => {
+        this.props.history.push('/mail')
+    }
+
     onToggleNav = () => {
         if (!this.state.navClassList) return this.setState({ navClassList: 'open-nav' })
-        return this.setState({ navClassList: '' })
+        this.onCloseNav()
     }
 
     render() {
@@ -69,12 +76,12 @@ export class MailApp extends React.Component {
         if (!mails) return
         return (
             <section className="mail-app main-layout">
-                <MailFilter onSetFilter={this.onSetFilter} onToggleNav={this.onToggleNav} />
+                <MailFilter onSetFilter={this.onSetFilter} onToggleNav={this.onToggleNav} onGoBack={this.onGoBack} />
                 <Link className="short-compose clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span className="short-view">+</span></Link>
                 <div className="side-by-side">
                     <div className={`side-folder ${navClassList}`}>
                         <Link className="compose-btn clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span className="full-view">+ Compose </span></Link>
-                        <MailFolderList onSetFilter={this.onSetFilter} navClassList={navClassList} />
+                        <MailFolderList onSetFilter={this.onSetFilter} onCloseNav={this.onCloseNav} />
                     </div>
                     <React.Fragment>
                         <Switch>
@@ -84,7 +91,7 @@ export class MailApp extends React.Component {
                     </React.Fragment>
                     {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail={this.onRemoveMail} />}
                 </div>
-                    <div className={`toggle-menu-screen ${navClassList}`} onClick={this.onToggleNav} alt="toggle main menu"></div>
+                <div className={`toggle-menu-screen ${navClassList}`} onClick={this.onToggleNav} alt="toggle main menu"></div>
             </section>
         )
     }
