@@ -3,7 +3,9 @@ import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { NoteAdd } from '../cmps/NoteAdd.jsx'
 import { Loader } from '../../../cmps/Loader.jsx'
-import { eventBusService } from '../../../services/eventBusService.js'
+// import { eventBusService } from '../../../services/eventBusService.js'
+const { NavLink } = ReactRouterDOM;
+
 
 export class NoteApp extends React.Component {
 
@@ -15,6 +17,7 @@ export class NoteApp extends React.Component {
 
     componentDidMount() {
         this.slowLoadNotes();
+
     }
 
     slowLoadNotes = () => {
@@ -38,7 +41,6 @@ export class NoteApp extends React.Component {
     }
 
     onToggleNav = () => {
-        console.log('toggle');
         if (!this.state.navClassList) return this.setState({ navClassList: 'open-nav' })
         return this.setState({ navClassList: '' })
     }
@@ -66,8 +68,9 @@ export class NoteApp extends React.Component {
                         toggleScreen={this.onToggleNav}
                     />
                 }
-
-                <div className={`toggle-menu-screen ${this.state.navClassList}`} onClick={this.onToggleNav} ></div>
+                <NavLink className="clean-link btn-close" to={`/note/`}>
+                    <div className={`toggle-menu-screen ${this.state.navClassList}`} onClick={this.onToggleNav} ></div>
+                </NavLink>
 
             </section>
         )

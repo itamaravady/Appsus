@@ -1,6 +1,6 @@
 import { noteService } from "../services/note.service.js";
-const { NavLink, Route } = ReactRouterDOM;
 import { NoteForDisplay } from './NoteForDisplay.jsx'
+const { NavLink } = ReactRouterDOM;
 
 export class NoteDetails extends React.Component {
     state = {
@@ -50,7 +50,7 @@ export class NoteDetails extends React.Component {
             <div>{isSelectedNote &&
                 <div style={{ backgroundColor: note.style.backgroundColor }} className="note-details-container">
                     <NavLink className="clean-link btn-close" to={`/note/`}>
-                        <img className="btn-close" src="../../assets/svg/x.svg" />
+                        <img onClick={this.props.toggleScreen} className="btn-close" src="assets/svg/x.svg" />
                     </NavLink>
                     {note && <NoteForDisplay setTodo={this.setTodo} noteId={noteId} note={note} classes='note-details' />}
                 </div>}
