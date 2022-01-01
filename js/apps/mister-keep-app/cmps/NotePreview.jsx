@@ -86,7 +86,6 @@ export class NotePreview extends React.Component {
     render() {
         const { note, isMenuHover } = this.state;
 
-
         return (
             <article
                 className={`note-preview-container `}
@@ -99,7 +98,7 @@ export class NotePreview extends React.Component {
                     <NoteForDisplay note={note} classes="note-preview" />
                 </NavLink>
                 <NoteMenu
-                    classes={`note-menu ${isMenuHover && 'open'}`}
+                    menuClasses={`note-menu ${isMenuHover && 'open'}`}
                     onRemove={this.onRemove}
                     onEdit={() => this.onEdit(note)}
                     onDuplicate={this.onDuplicate}
@@ -107,6 +106,7 @@ export class NotePreview extends React.Component {
                     toggleColorMenu={this.toggleColorMenu}
                     getIsColorMenuOpen={this.getIsColorMenuOpen}
                     onPinned={this.onPinned}
+                    pinClasses={note.isPinned && 'active'}
                 />
             </article >
 
