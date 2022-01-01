@@ -50,7 +50,7 @@ export function MailPreview({ mail, onAddStar, onToggleComposeModal, loadMails }
         <section>
             <article className="mail-preview" style={{ backgroundColor: getColor() }} >
                 <div className="actions-mail-preview-btns">
-                    {mail.status === 'inbox' && <button onClick={() => { changeReadMail(true) }}><img src={mail.isRead ? "assets/img/email-img/read.png" : "assets/img/email-img/unread.png"} /></button>}
+                    {mail.status === 'inbox' && <button onClick={() => { changeReadMail(true) }}><img className="btn-read" src={mail.isRead ? "assets/svg/mail/read.svg" : "assets/svg/mail/unread.svg"} /></button>}
                     <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
                 </div>
                 <Link onClick={mail.status !== 'draft' ? () => { changeReadMail(false) } : getDraftMail} className="clean-link"
