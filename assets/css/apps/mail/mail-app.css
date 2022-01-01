@@ -60,13 +60,16 @@
   transition: transform 0.3s;
   z-index: 5;
 }
+
 .side-folder.open-nav {
   transform: translate(0, 0);
 }
+
 .full-view {
   display: none;
 }
-.toggle-menu-screen {
+
+/* .toggle-menu-screen {
   display: none;
   position: fixed;
   width: 100vw;
@@ -79,18 +82,19 @@
   visibility: hidden;
   cursor: pointer;
   transition: opacity 0.5s;
-}
+} */
 
-.side-by-side h1{
+.side-by-side h1 {
   background-color: white;
+  text-align: center;
 }
 
-.toggle-menu-screen.open-nav {
+/* .toggle-menu-screen.open-nav {
   display: block;
   z-index: 1;
   visibility: visible;
   opacity: 1;
-}
+} */
 
 @media screen and (min-width: 850px) {
   .short-compose {

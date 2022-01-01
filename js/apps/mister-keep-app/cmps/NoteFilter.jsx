@@ -41,7 +41,7 @@ export class NoteFilter extends React.Component {
                         onChange={this.handleChange}
                         value={inputTxt} />
                 </form>
-                <img src="/assets/svg/clear.svg" onClick={this.clearSearch} type="button" />
+                <img src="assets/svg/clear.svg" onClick={this.clearSearch} type="button" />
             </section>
         )
     }

@@ -94,7 +94,7 @@ export class NotePreview extends React.Component {
                 onMouseLeave={() => this.toggleMenuBtns('hide')}
                 style={{ backgroundColor: this.state.note.style.backgroundColor }}
             >
-                <Route render={(props) => (<NoteDetails {...props} onSetTodo={this.onSetTodo} parentNoteId={note.id} />)} path="/note/:noteId" />
+                <Route render={(props) => (<NoteDetails {...props} toggleScreen={this.props.toggleScreen} onSetTodo={this.onSetTodo} parentNoteId={note.id} />)} path="/note/:noteId" />
                 <NavLink className="clean-link" to={`/note/${note.id}`}>
                     <NoteForDisplay note={note} classes="note-preview" />
                 </NavLink>

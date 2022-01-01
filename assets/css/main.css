@@ -7,6 +7,7 @@
 @import './cmps/loader.css';
 @import './cmps/user-msg.css';
 @import './parts/media-query.css';
+@import './parts/toggle-menu-screen.css';
 
 /* BOOKS */
 @import './apps/book/book-preview.css';

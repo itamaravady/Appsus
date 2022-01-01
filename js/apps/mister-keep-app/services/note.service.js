@@ -199,8 +199,7 @@ function _getNoteIndexById(noteId) {
 }
 
 function _getFilteredNotes(notes, filterBy) {
-
-    return notes.filter(note => note.info.inputTxt.includes(filterBy))
+    return notes.filter(note => (note.info.inputTxt.toLowerCase()).includes(filterBy.toLowerCase()))
 }
 
 function getNoteById(noteId) {

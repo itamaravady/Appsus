@@ -1,0 +1,21 @@
+.toggle-menu-screen {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: rgba(42, 42, 42, 0.6);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+    transition: opacity 0.5s;
+}
+
+.toggle-menu-screen.open-nav {
+    display: block;
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+}
