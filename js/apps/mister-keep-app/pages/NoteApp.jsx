@@ -13,13 +13,20 @@ export class NoteApp extends React.Component {
     }
 
     componentDidMount() {
-        this.loadNotes();
+        this.slowLoadNotes();
     }
 
-    loadNotes = () => {
+    slowLoadNotes = () => {
         const { filterBy } = this.state;
         noteService.waitQuery(filterBy)
             // noteService.query(filterBy)
+            .then(notes => {
+                this.setState({ notes })
+            })
+    }
+    loadNotes = () => {
+        const { filterBy } = this.state;
+        noteService.query(filterBy)
             .then(notes => {
                 this.setState({ notes })
             })
@@ -34,15 +41,25 @@ export class NoteApp extends React.Component {
     render() {
         const { notes } = this.state;
         return (
-            <section className="main-layout">
+            <section className='main-layout' >
+                <NoteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
                 <NoteAdd loadNotes={this.loadNotes} />
-                {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
+
                 {!notes ? <Loader /> :
                     <NoteList
                         loadNotes={this.loadNotes}
                         notes={notes}
+                        isPinList={true}
                     />
                 }
+                {!notes ? <div></div> :
+                    <NoteList
+                        loadNotes={this.loadNotes}
+                        notes={notes}
+                        isPinList={false}
+                    />
+                }
+
 
 
 

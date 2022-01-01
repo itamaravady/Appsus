@@ -21,6 +21,7 @@ export class NotePreview extends React.Component {
     componentDidMount() {
         this.removeEventBus = eventBusService.on('done-edit', (note) => {
             if (note.id === this.state.note.id) this.setState({ note })
+            this.props.loadNotes();
         })
     }
 
@@ -77,9 +78,14 @@ export class NotePreview extends React.Component {
         this.setState({ note });
     }
 
+    onPinned = () => {
+        this.setState((prevState) => ({ note: { ...prevState.note, isPinned: !prevState.note.isPinned } })
+            , () => noteService.replaceNote(this.state.note)
+                .then(this.props.loadNotes()));
+    }
+
     render() {
         const { note, isMenuHover } = this.state;
-
 
         return (
             <article
@@ -93,13 +99,15 @@ export class NotePreview extends React.Component {
                     <NoteForDisplay note={note} classes="note-preview" />
                 </NavLink>
                 <NoteMenu
-                    classes={`note-menu ${isMenuHover && 'open'}`}
+                    menuClasses={`note-menu ${isMenuHover && 'open'}`}
                     onRemove={this.onRemove}
                     onEdit={() => this.onEdit(note)}
                     onDuplicate={this.onDuplicate}
                     onSetStyle={this.onSetStyle}
                     toggleColorMenu={this.toggleColorMenu}
                     getIsColorMenuOpen={this.getIsColorMenuOpen}
+                    onPinned={this.onPinned}
+                    pinClasses={note.isPinned && 'active'}
                 />
             </article >
 

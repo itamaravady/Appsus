@@ -27,7 +27,7 @@ function _createNotes() {
             {
                 id: utilService.makeId(),
                 type: 'txt',
-                isPinned: false,
+                isPinned: true,
                 info: {
                     inputTxt: 'js is red, vue is blue, css is green and I love React.',
                     txt: 'js is red, vue is blue, css is green and I love React.',
@@ -133,23 +133,19 @@ function addNote(inputText, noteType) {
 
 
 function editNote(inputTxt, note) {
-    // console.log(inputTxt, note);
     const notes = _loadNotesFromStorage();
 
     const duplicateNote = JSON.parse(JSON.stringify(note))
     duplicateNote.info = { ...duplicateNote.info, [duplicateNote.type]: inputTxt, inputTxt: inputTxt }
     if (duplicateNote.type === 'todos') {
-        console.log(duplicateNote.type);
         const todos = _formatTodos(inputTxt);
         duplicateNote.info.todos = todos;
-        console.log(duplicateNote);
-        // duplicateNote.info = { ...duplicateNote.info, [noteType]: todos, inputTxt: inputTxt }
     }
 
     const noteIdx = notes.findIndex(note => note.id === duplicateNote.id)
     notes.splice(noteIdx, 1, duplicateNote);
     _saveNotesToStorage(notes);
-    return Promise.resolve(duplicateNote);//?
+    return Promise.resolve(duplicateNote);
 }
 function replaceNote(note) {
     const notes = _loadNotesFromStorage();
@@ -203,8 +199,8 @@ function _getNoteIndexById(noteId) {
 }
 
 function _getFilteredNotes(notes, filterBy) {
-    //todo!
-    return notes
+
+    return notes.filter(note => note.info.inputTxt.includes(filterBy))
 }
 
 function getNoteById(noteId) {
