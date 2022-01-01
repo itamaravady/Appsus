@@ -15,6 +15,7 @@
 
 .mail-details-header {
   display: flex;
+  padding: 10px;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid black;
@@ -24,6 +25,7 @@
   background-color: white;
   min-height: 90vh;
   width: 100%;
+  box-shadow: 3px 0px 1px 0px black;
 }
 
 .details-section h1{
@@ -32,7 +34,7 @@
 }
 
 .details-section h4{
-  padding-top: 20px;
+  padding: 20px;
 }
 
 .details-section h4 small{

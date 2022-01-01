@@ -1,25 +1,25 @@
 .main-layout {
-  max-width: 200px;
+  /* max-width: 320px; */
   margin: 0 auto;
 }
 
-@media screen and (min-width: 450px) {
+/* @media screen and (min-width: 450px) {
   .main-layout {
     max-width: 350px;
   }
 }
 
-@media screen and (min-width: 680px) {
+@media screen and (min-width: 650px) {
   .main-layout {
     max-width: 600px;
   }
 }
 
-@media screen and (min-width: 880px) {
+@media screen and (min-width: 850px) {
   .main-layout {
     max-width: 800px;
   }
-}
+} */
 
 @media screen and (min-width: 1120px) {
   .main-layout {

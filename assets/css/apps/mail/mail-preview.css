@@ -1,14 +1,17 @@
 .list-info-mail {
-  /* background-color: white; */
-  height: 50px;
+  height: 100%;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   margin: 0;
-  /* box-shadow: 3px 0px 1px 0px black; */
-  align-items: center;
+  align-items: flex-start;
+}
+
+.mail-preview a {
   flex-grow: 1;
 }
+
 .list-info-mail li:not(:nth-child(2)) {
   font-weight: bold;
 }
@@ -17,23 +20,21 @@
   color: rgb(131, 128, 128);
 }
 
-/* .list-info-mail:hover {
-  background-color: rgb(215, 220, 223);
-  box-shadow: 3px 0px 5px 0px black;
-} */
+.list-info-mail li:last-child {
+  align-self: flex-end;
+}
 
 .body-title-container {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
 }
 
 .mail-preview {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-auto-rows: 50px;
+  display: flex;
   background-color: white;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px;
   margin: 0;
@@ -51,7 +52,7 @@
   font-weight: bold;
 }
 
-.mail-preview button.star{
+.mail-preview button.star {
   font-weight: normal;
 }
 
@@ -65,14 +66,31 @@
   align-items: center;
 }
 
-.actions-mail-preview-btns button{
+.actions-mail-preview-btns button {
   height: 30px;
   width: 30px;
   margin: 0;
   padding: 5px;
 }
-.actions-mail-preview-btns button img{
+.actions-mail-preview-btns button img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+
+@media screen and (min-width: 650px) {
+  .list-info-mail {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .body-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .list-info-mail li:last-child {
+    align-self: center;
+  }
 }

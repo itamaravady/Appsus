@@ -42,9 +42,13 @@ export function MailPreview({ mail, onAddStar, onToggleComposeModal, loadMails }
         onToggleComposeModal()
     }
 
+    function getColor() {
+        if (mail.isRead) return 'rgb(230 228 228)'
+    }
+
     return (
         <section>
-            < article className="mail-preview" >
+            <article className="mail-preview" style={{ backgroundColor: getColor() }} >
                 <div className="actions-mail-preview-btns">
                     {mail.status === 'inbox' && <button onClick={() => { changeReadMail(true) }}><img src={mail.isRead ? "assets/img/email-img/read.png" : "assets/img/email-img/unread.png"} /></button>}
                     <button className={mail.isStarred ? 'star' : ''} onClick={() => { toggleStar(mail.id) }}>⭐</button>
@@ -62,6 +66,6 @@ export function MailPreview({ mail, onAddStar, onToggleComposeModal, loadMails }
                 </Link>
             </article >
 
-        </section>
+        </section >
     )
 }

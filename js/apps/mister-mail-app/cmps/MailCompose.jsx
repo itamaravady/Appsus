@@ -79,7 +79,7 @@ class _MailCompose extends React.Component {
                     </label>
                     <textarea name="body" value={body} onChange={this.handleChange}></textarea>
                     <div className="options-new-mail">
-                        <Link to="/mail" onClick={this.submit}>Send</Link>
+                        <Link className="clean-link" to="/mail" onClick={this.submit}>Send</Link>
                         <img onClick={this.onRemove} src="assets/img/email-img/trash.png" />
                     </div>
                 </form>

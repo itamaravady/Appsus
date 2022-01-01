@@ -55,21 +55,20 @@ export class MailFolderList extends React.Component {
         return (
             <section className="folder-list">
                 <ul className="clean-list status-list">
-
                     <div ref={this.inboxRef} onClick={() => this.toggleClassActive(this.inboxRef)} className={`li-img-container`}>
-                        <img src="assets/img/email-img/inbox.png" />
+                        <img src="assets/svg/mail/inbox.svg" />
                         <NavLink className="clean-link" to="/mail" data-value="inbox" data-field="status" onClick={this.changeFilter}>Inbox</NavLink>
                     </div>
                     <div ref={this.isStarRef} onClick={() => this.toggleClassActive(this.isStarRef)} className={`li-img-container`}>
-                        <img src="assets/img/email-img/star.png" />
+                        <img src="assets/svg/mail/star.svg" />
                         <NavLink className="clean-link" to="/mail" data-value={true} data-field='isStarred' onClick={this.changeIsStarred} > Starred</NavLink>
                     </div>
                     <div ref={this.sentRef} onClick={() => this.toggleClassActive(this.sentRef)} className={`li-img-container`}>
-                        <img src="assets/img/email-img/sent.png" />
+                        <img src="assets/svg/mail/sent.svg" />
                         <NavLink className="clean-link" to="/mail" data-value="sent" data-field="status" onClick={this.changeFilter}>Sent Mail</NavLink>
                     </div>
                     <div ref={this.draftRef} onClick={() => this.toggleClassActive(this.draftRef)} className={`li-img-container`}>
-                        <img src="assets/img/email-img/draft.png" />
+                        <img src="assets/svg/mail/draft.svg" />
                         <NavLink className="clean-link" to="/mail" data-value="draft" data-field="status" onClick={this.changeFilter}>Draft</NavLink>
                     </div>
                 </ul>

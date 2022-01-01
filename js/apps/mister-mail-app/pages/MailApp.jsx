@@ -16,7 +16,8 @@ export class MailApp extends React.Component {
         filterBy: {
             status: 'inbox',
         },
-        isShowComposeModal: false
+        isShowComposeModal: false,
+        navClassList: ''
     }
 
     componentDidMount() {
@@ -58,16 +59,22 @@ export class MailApp extends React.Component {
             .then(() => this.loadMails())
     }
 
+    onToggleNav = () => {
+        if (!this.state.navClassList) return this.setState({ navClassList: 'open-nav' })
+        return this.setState({ navClassList: '' })
+    }
+
     render() {
-        const { mails, isShowComposeModal } = this.state
+        const { mails, isShowComposeModal, navClassList } = this.state
         if (!mails) return
         return (
             <section className="mail-app main-layout">
-                <MailFilter onSetFilter={this.onSetFilter} />
+                <MailFilter onSetFilter={this.onSetFilter} onToggleNav={this.onToggleNav} />
+                <Link className="short-compose clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span className="short-view">+</span></Link>
                 <div className="side-by-side">
-                    <div className="side-folder">
-                        <Link className="compose-btn clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span>+</span> Compose</Link>
-                        <MailFolderList onSetFilter={this.onSetFilter} />
+                    <div className={`side-folder ${navClassList}`}>
+                        <Link className="compose-btn clean-link" onClick={this.onToggleComposeModal} to={'/mail'} > <span className="full-view">+ Compose </span></Link>
+                        <MailFolderList onSetFilter={this.onSetFilter} navClassList={navClassList} />
                     </div>
                     <React.Fragment>
                         <Switch>
@@ -76,9 +83,8 @@ export class MailApp extends React.Component {
                         </Switch>
                     </React.Fragment>
                     {isShowComposeModal && <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail={this.onRemoveMail} />}
-                    {/* <Route render={(props) => <MailCompose onToggleComposeModal={this.onToggleComposeModal} onAddMail={this.onAddMail} onRemoveMail = {this.onRemoveMail} {...props} />} path="/mail/compose/:mailId?" /> */}
-
                 </div>
+                    <div className={`toggle-menu-screen ${navClassList}`} onClick={this.onToggleNav} alt="toggle main menu"></div>
             </section>
         )
     }

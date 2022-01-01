@@ -1,17 +1,44 @@
 .mail-app .compose-btn {
   display: flex;
   padding: 15px;
-  color: rgb(87, 87, 87);
+  color: white;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(125, 125, 230);
   font-size: 20px;
-  transition: all .3s;
+  transition: all 0.3s;
+  position: fixed;
+  bottom: 0%;
+  right: 20%;
+  display: none;
+}
+
+.short-compose {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  color: rgb(54, 54, 54);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: white;
+  line-height: 0.9rem;
+  font-weight: bold;
+  font-size: 22px;
+  transition: all 0.3s;
+  position: fixed;
+  bottom: 4%;
+  right: 10%;
+  box-shadow: 0 0px 3px 3px #0000001c;
+}
+
+.mail-app {
+  position: relative;
 }
 
 .mail-app .compose-btn:hover {
-  background-color: rgb(218, 214, 214);
+  background-color: rgb(125, 125, 230);
   box-shadow: 0px 1px 5px 0px #555050;
 }
 
@@ -19,11 +46,83 @@
   width: 100%;
   min-height: 76.5vh;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 1fr;
 }
 
-.side-folder{
-  background-color: aliceblue;
+.side-folder {
+  transform: translate(-200%, 0);
   height: 100%;
   width: 200px;
+  position: absolute;
+  top: 0;
+  color: white;
+  background-color: rgb(51, 50, 50);
+  transition: transform 0.3s;
+  z-index: 5;
+}
+.side-folder.open-nav {
+  transform: translate(0, 0);
+}
+.full-view {
+  display: none;
+}
+.toggle-menu-screen {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: rgba(42, 42, 42, 0.6);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+
+.side-by-side h1{
+  background-color: white;
+}
+
+.toggle-menu-screen.open-nav {
+  display: block;
+  z-index: 1;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media screen and (min-width: 850px) {
+  .short-compose {
+    display: none;
+  }
+
+  .full-view {
+    display: block;
+  }
+
+  .mail-app .compose-btn {
+    display: flex;
+    position: static;
+    background-color: white;
+    color: rgb(87, 87, 87);
+  }
+
+  .mail-app .compose-btn:hover {
+    background-color: rgb(218, 214, 214);
+  }
+
+  .side-folder {
+    position: static;
+    transform: translate(0, 0);
+  }
+
+  .side-by-side {
+    grid-template-columns: auto 1fr;
+  }
+
+  .side-folder {
+    background-color: aliceblue;
+    color: black;
+  }
 }

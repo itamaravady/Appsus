@@ -3,8 +3,8 @@
   z-index: 5;
   bottom: 0;
   right: 3%;
-  height: 70vh;
-  width: 80vh;
+  height: 60vh;
+  width: 55vh;
   background-color: white;
 }
 
@@ -50,7 +50,6 @@
 
 .new-mail-form label {
   padding-bottom: 10px;
-  border-bottom: 1px solid black;
 }
 
 .options-new-mail img {
@@ -59,12 +58,24 @@
 }
 
 .new-mail-form input {
-  width: 85%;
+  width: 100%;
   height: 100%;
+  border-bottom: 1px solid black;
 }
 
 .options-new-mail {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.options-new-mail a{
+  color: rgb(48, 47, 47);
+}
+
+@media screen and (min-width: 450px) {
+  .mail-compose-section {
+    height: 70vh;
+    width: 80vh;
+  }
 }
