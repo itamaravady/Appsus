@@ -1,0 +1,44 @@
+.note-filter {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    height: 50px;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 1px #a9a9a9;
+    min-width: 350px;
+}
+
+.note-filter form {
+    margin: 0;
+    flex-grow: 1;
+    padding: 0;
+    height: 100%;
+}
+
+.note-filter form input {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.note-filter form input:focus {
+    outline: none;
+}
+
+.note-filter img {
+    height: 100%;
+    transition: 0.2s;
+}
+
+.note-filter img:hover {
+    transform: scale(1.08);
+}
+
+.note-filter img:active {
+    /* transform: scale(1.08); */
+    transform: rotate(359deg);
+}

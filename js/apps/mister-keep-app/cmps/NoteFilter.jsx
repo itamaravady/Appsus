@@ -30,17 +30,19 @@ export class NoteFilter extends React.Component {
     render() {
         const { inputTxt } = this.state;
         return (
-            <form onSubmit={this.submit} >
-                <input
-                    type="text"
-                    autoComplete="off"
-                    placeholder={'Search notes'}
-                    className="add-input"
-                    name="inputTxt"
-                    onChange={this.handleChange}
-                    value={inputTxt} />
-                <button onClick={this.clearSearch} type="button">Clear</button>
-            </form>
+            <section className="note-filter">
+                <form onSubmit={this.submit} >
+                    <input
+                        type="text"
+                        autoComplete="off"
+                        placeholder={'Search notes'}
+                        className="filter-input"
+                        name="inputTxt"
+                        onChange={this.handleChange}
+                        value={inputTxt} />
+                </form>
+                <img src="/assets/svg/clear.svg" onClick={this.clearSearch} type="button" />
+            </section>
         )
     }
 }

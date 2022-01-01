@@ -41,9 +41,10 @@ export class NoteApp extends React.Component {
     render() {
         const { notes } = this.state;
         return (
-            <section className="main-layout">
+            <section className='main-layout' >
                 <NoteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
                 <NoteAdd loadNotes={this.loadNotes} />
+
                 {!notes ? <Loader /> :
                     <NoteList
                         loadNotes={this.loadNotes}
@@ -58,6 +59,7 @@ export class NoteApp extends React.Component {
                         isPinList={false}
                     />
                 }
+
 
 
 
