@@ -35,8 +35,8 @@ export class NoteApp extends React.Component {
         const { notes } = this.state;
         return (
             <section className="main-layout">
+                <NoteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} />
                 <NoteAdd loadNotes={this.loadNotes} />
-                {/* <noteFilter filterBy={this.state.filterBy} onSetFilter={this.onSetFilter} /> */}
                 {!notes ? <Loader /> :
                     <NoteList
                         loadNotes={this.loadNotes}

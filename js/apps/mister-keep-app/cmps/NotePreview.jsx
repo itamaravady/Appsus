@@ -21,6 +21,7 @@ export class NotePreview extends React.Component {
     componentDidMount() {
         this.removeEventBus = eventBusService.on('done-edit', (note) => {
             if (note.id === this.state.note.id) this.setState({ note })
+            this.props.loadNotes();
         })
     }
 
