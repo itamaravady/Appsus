@@ -60,12 +60,15 @@
   transition: transform 0.3s;
   z-index: 5;
 }
+
 .side-folder.open-nav {
   transform: translate(0, 0);
 }
+
 .full-view {
   display: none;
 }
+
 .toggle-menu-screen {
   display: none;
   position: fixed;
@@ -81,8 +84,9 @@
   transition: opacity 0.5s;
 }
 
-.side-by-side h1{
+.side-by-side h1 {
   background-color: white;
+  text-align: center;
 }
 
 .toggle-menu-screen.open-nav {
