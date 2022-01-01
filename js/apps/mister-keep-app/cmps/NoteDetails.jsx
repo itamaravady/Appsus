@@ -14,7 +14,10 @@ export class NoteDetails extends React.Component {
     loadNote = () => {
         const { noteId } = this.props.match.params
         const note = noteService.getNoteById(noteId);
-        this.setState({ note })
+        this.setState({ note }, () => {
+            if (this.state.note && this.props.parentNoteId === this.state.note.id) this.props.toggleScreen();
+        })
+
 
     }
 

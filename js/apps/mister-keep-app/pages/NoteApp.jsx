@@ -38,6 +38,7 @@ export class NoteApp extends React.Component {
     }
 
     onToggleNav = () => {
+        console.log('toggle');
         if (!this.state.navClassList) return this.setState({ navClassList: 'open-nav' })
         return this.setState({ navClassList: '' })
     }
@@ -66,7 +67,7 @@ export class NoteApp extends React.Component {
                     />
                 }
 
-                <div className={`toggle-details-screen ${this.state.navClassList}`} onClick={this.onToggleNav} ></div>
+                <div className={`toggle-menu-screen ${this.state.navClassList}`} onClick={this.onToggleNav} ></div>
 
             </section>
         )
