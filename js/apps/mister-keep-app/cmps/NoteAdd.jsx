@@ -89,10 +89,10 @@ export class NoteAdd extends React.Component {
                         value={inputTxt} />
                 </form>
                 <div className="note-add-menu">
-                    <img src="/assets/svg/note/txt.svg" className={`btn-note-add btn-note-add-txt  ${noteType === 'txt' && 'active'}`} onClick={this.onChangeAddNoteType} name="txt" />
-                    <img src="/assets/svg/note/image.svg" className={`btn-note-add btn-note-add-img ${noteType === 'img' && 'active'}`} onClick={this.onChangeAddNoteType} name="img" />
-                    <img src="/assets/svg/note/video.svg" className={`btn-note-add btn-note-add-video ${noteType === 'video' && 'active'}`} onClick={this.onChangeAddNoteType} name="video" />
-                    <img src="/assets/svg/note/todo.svg" className={`btn-note-add btn-note-add-todos ${noteType === 'todos' && 'active'}`} onClick={this.onChangeAddNoteType} name="todos" />
+                    <img src="assets/svg/note/txt.svg" className={`btn-note-add btn-note-add-txt  ${noteType === 'txt' && 'active'}`} onClick={this.onChangeAddNoteType} name="txt" />
+                    <img src="assets/svg/note/image.svg" className={`btn-note-add btn-note-add-img ${noteType === 'img' && 'active'}`} onClick={this.onChangeAddNoteType} name="img" />
+                    <img src="assets/svg/note/video.svg" className={`btn-note-add btn-note-add-video ${noteType === 'video' && 'active'}`} onClick={this.onChangeAddNoteType} name="video" />
+                    <img src="assets/svg/note/todo.svg" className={`btn-note-add btn-note-add-todos ${noteType === 'todos' && 'active'}`} onClick={this.onChangeAddNoteType} name="todos" />
                 </div>
 
             </section>
