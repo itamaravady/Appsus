@@ -39,6 +39,7 @@ export class NotePreview extends React.Component {
 
     onEdit = (note) => {
         eventBusService.emit('edit-note', note)
+        // console.log(note);
     }
 
     onDuplicate = () => {
@@ -72,6 +73,10 @@ export class NotePreview extends React.Component {
 
     getIsColorMenuOpen = () => this.state.isColorMenuOpen
 
+    onSetTodo = (note) => {
+        this.setState({ note });
+    }
+
     render() {
         const { note, isMenuHover } = this.state;
 
@@ -83,13 +88,12 @@ export class NotePreview extends React.Component {
                 onMouseLeave={() => this.toggleMenuBtns('hide')}
                 style={{ backgroundColor: this.state.note.style.backgroundColor }}
             >
-                <Route render={(props) => (<NoteDetails {...props} parentNoteId={note.id} />)} path="/note/:noteId" />
+                <Route render={(props) => (<NoteDetails {...props} onSetTodo={this.onSetTodo} parentNoteId={note.id} />)} path="/note/:noteId" />
                 <NavLink className="clean-link" to={`/note/${note.id}`}>
                     <NoteForDisplay note={note} classes="note-preview" />
                 </NavLink>
                 <NoteMenu
                     classes={`note-menu ${isMenuHover && 'open'}`}
-                    note={note}//?
                     onRemove={this.onRemove}
                     onEdit={() => this.onEdit(note)}
                     onDuplicate={this.onDuplicate}

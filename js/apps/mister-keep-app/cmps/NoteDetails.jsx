@@ -17,9 +17,31 @@ export class NoteDetails extends React.Component {
         this.setState({ note })
 
     }
+
+    setTodo = (todoId) => {
+        const todoIdx = this.state.note.info.todos.findIndex(todo => todo.id === todoId);
+
+        this.setState(prevState => {
+            return {
+                note: {
+                    ...prevState.note, info: {
+                        ...prevState.note.info, todos: (() => {
+                            const modifiedTodos = prevState.note.info.todos.slice();
+                            modifiedTodos[todoIdx].isDone = !modifiedTodos[todoIdx].isDone;
+                            return modifiedTodos;
+                        })()
+                    }
+                }
+            }
+        }, () => noteService.replaceNote(this.state.note)
+            .then(this.props.onSetTodo(this.state.note)));
+
+    }
+
     render() {
         const { note } = this.state;
-        const { parentNoteId } = this.props
+        const { parentNoteId } = this.props;
+        const { noteId } = this.props.match.params
         const isSelectedNote = note && parentNoteId === note.id;
         return (
             <div>{isSelectedNote &&
@@ -27,7 +49,7 @@ export class NoteDetails extends React.Component {
                     <NavLink className="clean-link btn-close" to={`/note/`}>
                         <img className="btn-close" src="../../assets/svg/x.svg" />
                     </NavLink>
-                    {note && <NoteForDisplay note={note} classes='note-details' />}
+                    {note && <NoteForDisplay setTodo={this.setTodo} noteId={noteId} note={note} classes='note-details' />}
                 </div>}
             </div>
         )
