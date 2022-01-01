@@ -37,4 +37,5 @@
 
 .about img {
     border: rgb(97, 97, 97) 2px solid;
+    width: 100vw;
 }
