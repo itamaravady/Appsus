@@ -13,6 +13,7 @@
 }
 
 .app-header h1 {
+    color: #ffffff;
     text-decoration: overline;
     font-size: 1.6rem
 }

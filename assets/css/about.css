@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    align-items: center;
+    height: 90vh;
+    width: 100vw;
+    background-size: cover;
+    background-color: rgb(255, 255, 255);
+}
+
+.about h1, h3 {
+
+    color: rgb(109, 109, 109);
+    font-size: 3.5rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+}
+
+.about h3 {
+
+    font-size: 3rem;
+
+}
+
+.about p {
+
+    color: rgb(109, 109, 109);
+    font-size: 1.5rem;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 400;
+
+}
+
+.about img {
+    border: rgb(97, 97, 97) 2px solid;
+}

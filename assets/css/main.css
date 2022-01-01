@@ -2,6 +2,7 @@
 @import './parts/base.css';
 @import './parts/fonts.css';
 @import './home.css';
+@import './about.css';
 @import './cmps/app-header.css';
 @import './cmps/hamburger-menu.css';
 @import './cmps/loader.css';
