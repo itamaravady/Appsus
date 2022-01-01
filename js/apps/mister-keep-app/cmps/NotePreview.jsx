@@ -77,6 +77,12 @@ export class NotePreview extends React.Component {
         this.setState({ note });
     }
 
+    onPinned = () => {
+        this.setState((prevState) => ({ note: { ...prevState.note, isPinned: !prevState.note.isPinned } })
+            , () => noteService.replaceNote(this.state.note)
+                .then(this.props.loadNotes()));
+    }
+
     render() {
         const { note, isMenuHover } = this.state;
 
@@ -100,6 +106,7 @@ export class NotePreview extends React.Component {
                     onSetStyle={this.onSetStyle}
                     toggleColorMenu={this.toggleColorMenu}
                     getIsColorMenuOpen={this.getIsColorMenuOpen}
+                    onPinned={this.onPinned}
                 />
             </article >
 

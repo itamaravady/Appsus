@@ -27,7 +27,7 @@ function _createNotes() {
             {
                 id: utilService.makeId(),
                 type: 'txt',
-                isPinned: false,
+                isPinned: true,
                 info: {
                     inputTxt: 'js is red, vue is blue, css is green and I love React.',
                     txt: 'js is red, vue is blue, css is green and I love React.',

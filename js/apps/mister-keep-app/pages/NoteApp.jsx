@@ -41,6 +41,14 @@ export class NoteApp extends React.Component {
                     <NoteList
                         loadNotes={this.loadNotes}
                         notes={notes}
+                        isPinList={true}
+                    />
+                }
+                {!notes ? <div></div> :
+                    <NoteList
+                        loadNotes={this.loadNotes}
+                        notes={notes}
+                        isPinList={false}
                     />
                 }
 
