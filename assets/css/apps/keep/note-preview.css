@@ -38,10 +38,19 @@
 }
 
 .note-menu {
-    opacity: 0;
+    opacity: 1;
     transition: 0.2s;
     margin-top: 7px;
     margin-bottom: 3px;
+}
+
+@media screen and (min-width: 850px) {
+    .note-menu {
+        opacity: 0;
+        transition: 0.2s;
+        margin-top: 7px;
+        margin-bottom: 3px;
+    }
 }
 
 .note-menu.open {
