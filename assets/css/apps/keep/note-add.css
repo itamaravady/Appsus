@@ -1,0 +1,66 @@
+.note-add {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px 20px;
+    height: 50px;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 1px #a9a9a9;
+    min-width: 350px;
+}
+
+.note-add form {
+    margin: 0;
+    flex-grow: 1;
+    padding: 0;
+    height: 100%;
+}
+
+.note-add form input {
+    height: 100%;
+    width: 100%;
+    border: none;
+}
+
+.note-add form input:focus {
+    outline: none;
+}
+
+.note-add .note-add-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.note-add .note-add-menu .btn-note-add {
+    width: 23px;
+    filter: invert(78%) sepia(0%) saturate(1480%) hue-rotate(168deg) brightness(83%) contrast(78%);
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-img {
+    width: 30px;
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-video {
+    width: 26px;
+}
+
+.note-add .note-add-menu .btn-note-add.btn-note-add-todos {
+    width: 26px;
+}
+
+.note-add .note-add-menu .btn-note-add:hover {
+    cursor: pointer;
+    filter: invert(31%) sepia(73%) saturate(2715%) hue-rotate(196deg) brightness(105%) contrast(106%);
+}
+
+.note-add .note-add-menu .btn-note-add:not(:first-of-type) {
+    margin-inline-start: 5px;
+}
+
+.note-add .note-add-menu .btn-note-add.active {
+    filter: invert(31%) sepia(73%) saturate(2715%) hue-rotate(196deg) brightness(105%) contrast(106%);
+}
