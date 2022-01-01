@@ -13,13 +13,20 @@ export class NoteApp extends React.Component {
     }
 
     componentDidMount() {
-        this.loadNotes();
+        this.slowLoadNotes();
     }
 
-    loadNotes = () => {
+    slowLoadNotes = () => {
         const { filterBy } = this.state;
         noteService.waitQuery(filterBy)
             // noteService.query(filterBy)
+            .then(notes => {
+                this.setState({ notes })
+            })
+    }
+    loadNotes = () => {
+        const { filterBy } = this.state;
+        noteService.query(filterBy)
             .then(notes => {
                 this.setState({ notes })
             })
