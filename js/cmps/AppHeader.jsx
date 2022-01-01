@@ -12,6 +12,11 @@ export class AppHeader extends React.Component {
         if (action === 'hide') this.setState({ classes: null });
         else this.setState({ classes: 'open' });
     }
+
+    toggleMenuMobile = () => {
+        if (this.state.classes === 'open') this.setState({ classes: null });
+        else this.setState({ classes: 'open' });
+    }
     render() {
         const { classes } = this.state;
         return (
@@ -19,7 +24,11 @@ export class AppHeader extends React.Component {
                 <header className="app-header main-layout">
                     <NavLink exact className="clean-link" to="/"><h1 className="seconday-header">Appsus</h1></NavLink>
 
-                    <img src="assets/svg/hamburger.svg" onMouseOver={this.toggleMenu} />
+                    <img
+                        src="assets/svg/hamburger.svg"
+                        onMouseOver={this.toggleMenu}
+                        onClick={this.toggleMenuMobile}
+                    />
                     {<HamburgerMenu onLeave={() => this.toggleMenu('hide')} classes={classes} />}
                 </header>
             </section>
