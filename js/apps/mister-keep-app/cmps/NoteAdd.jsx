@@ -7,13 +7,14 @@ export class NoteAdd extends React.Component {
         inputTxt: '',
         noteType: 'txt',
         placeHolder: 'Type note...',
-        noteId: null,
+        note: null,
     }
     removeEventBus = null;
 
     componentDidMount() {
         this.removeEventBus = eventBusService.on('edit-note', (note) => {
-            this.setState({ inputTxt: note.info.inputTxt, noteType: note.type, noteId: note.id, });
+            this.setState({ inputTxt: note.info.inputTxt, noteType: note.type, note: note });
+
         })
     }
 
@@ -34,24 +35,31 @@ export class NoteAdd extends React.Component {
             inputTxt: '',
             noteType: 'txt',
             placeHolder: 'Type note...',
-            noteId: null,
+            note: null,
         });
     }
 
     submit = (ev) => {
         ev.preventDefault();
-        const { inputTxt: inputTxt, noteType, noteId } = this.state;
-        noteService.addNote(inputTxt, noteType, noteId)
+        const { inputTxt, noteType, note } = this.state;
+        if (note) noteService.editNote(inputTxt, note)
             .then((note) => {
-
-                if (note) eventBusService.emit('done-edit', note);
-                else this.props.loadNotes();
+                eventBusService.emit('done-edit', note);
                 this.onBlur();
             });
+        else noteService.addNote(inputTxt, noteType)
+            .then(() => {
+                this.props.loadNotes();
+                this.onBlur();
+            });
+
+
+
     }
 
     render() {
         const { placeHolder, noteType, inputTxt } = this.state;
+        // console.log(this.state.note);
         return (
 
             <section className="note-add">

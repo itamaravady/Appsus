@@ -6,6 +6,8 @@ export const noteService = {
     query,
     removeNote,
     addNote,
+    editNote,
+    replaceNote,
     getNoteById,
     setNoteStyle,
     duplicateNote,
@@ -68,24 +70,12 @@ function _createNotes() {
                 info: {
                     inputTxt: 'buy bananas,get a haircut',
                     label: 'Personal',
-                    todos: 'buy bananas,get a haircut',
+                    todos: [
+                        { id: utilService.makeId(), todo: 'buy bananas', isDone: true }, { id: utilService.makeId(), todo: 'get a haircut', isDone: false },
+                    ],
                 },
                 style: {
                     backgroundColor: '#f2e863',
-                    font: 'impact',
-                }
-            },
-            {
-                id: utilService.makeId(),
-                type: 'todos',
-                isPinned: false,
-                info: {
-                    inputTxt: 'buy tomatoes,delete me',
-                    label: 'Personal',
-                    todos: 'buy tomatoes,delete me',
-                },
-                style: {
-                    backgroundColor: '#f2cd60',
                     font: 'impact',
                 }
             },
@@ -115,36 +105,67 @@ function waitQuery(filterBy = null) {
     });
 }
 
-function addNote(inputText, noteType, noteId) {
+
+
+
+
+
+function addNote(inputText, noteType) {
     var notes = _loadNotesFromStorage();
-    if (noteId) {
-        var note = notes.find(note => note.id === noteId)
-
-        note.info = { ...note.info, [noteType]: inputText, inputTxt: inputText }
-
-        const noteIdx = notes.findIndex(note => note.id === noteId)
-        notes.splice(noteIdx, 1, note);
-        _saveNotesToStorage(notes);
-        return Promise.resolve(note);
-    } else {
-
-        var note = {
-            id: utilService.makeId(),
-            type: noteType,
-            isPinned: false,
-            info: {
-                inputTxt: inputText,
-                [noteType]: inputText
-            },
-            style: {
-                backgroundColor: '#fff',
-                font: 'ariel',
-            },
-        }
-        notes.push(note);
-        _saveNotesToStorage(notes);
-        return Promise.resolve();
+    var note = {
+        id: utilService.makeId(),
+        type: noteType,
+        isPinned: false,
+        info: {
+            inputTxt: inputText,
+            [noteType]: inputText
+        },
+        style: {
+            backgroundColor: '#fff',
+            font: 'ariel',
+        },
     }
+    if (noteType === 'todos') note.info.todos = _formatTodos(inputText);
+    notes.push(note);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+
+function editNote(inputTxt, note) {
+    // console.log(inputTxt, note);
+    const notes = _loadNotesFromStorage();
+
+    const duplicateNote = JSON.parse(JSON.stringify(note))
+    duplicateNote.info = { ...duplicateNote.info, [duplicateNote.type]: inputTxt, inputTxt: inputTxt }
+    if (duplicateNote.type === 'todos') {
+        console.log(duplicateNote.type);
+        const todos = _formatTodos(inputTxt);
+        duplicateNote.info.todos = todos;
+        console.log(duplicateNote);
+        // duplicateNote.info = { ...duplicateNote.info, [noteType]: todos, inputTxt: inputTxt }
+    }
+
+    const noteIdx = notes.findIndex(note => note.id === duplicateNote.id)
+    notes.splice(noteIdx, 1, duplicateNote);
+    _saveNotesToStorage(notes);
+    return Promise.resolve(duplicateNote);//?
+}
+function replaceNote(note) {
+    const notes = _loadNotesFromStorage();
+    const noteIdx = notes.findIndex(currNote => currNote.id === note.id);
+    notes.splice(noteIdx, 1, note);
+    _saveNotesToStorage(notes);
+    return Promise.resolve();
+}
+
+
+
+function _formatTodos(todos) {
+    todos = todos.trim();
+    todos = todos.split(',').map(todo => (todo.trim()))
+    todos = todos.map(todo => ({ id: utilService.makeId(), todo, isDone: false }));
+    return todos;
 }
 
 function duplicateNote(note) {
@@ -222,6 +243,7 @@ function addMailToNotes(mail) {
 }
 
 function _saveNotesToStorage(notes) {
+    // console.log(notes);
     storageService.save(KEY, notes)
 }
 

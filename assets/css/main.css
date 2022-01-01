@@ -1,5 +1,6 @@
 /* GENERAL */
 @import './parts/base.css';
+@import './parts/fonts.css';
 @import './home.css';
 @import './cmps/app-header.css';
 @import './cmps/hamburger-menu.css';

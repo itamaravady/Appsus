@@ -1,7 +1,7 @@
 import { TodosPreview } from './TodosPreview.jsx'
 import { MailsPreview } from './MailsPreview.jsx'
 
-export function NoteForDisplay({ note, classes }) {
+export function NoteForDisplay({ note, classes, setTodo, noteId }) {
     const { info } = note
     return (
         <div className={classes}>
@@ -17,7 +17,7 @@ export function NoteForDisplay({ note, classes }) {
                     </video>
                 )
             }
-            {info.todos && <TodosPreview todos={info.todos} />}
+            {info.todos && <TodosPreview noteId={noteId} setTodo={setTodo} todos={info.todos} />}
             {info.mail && <MailsPreview mail={info.mail} />}
         </div>
     )

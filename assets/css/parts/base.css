@@ -2,11 +2,6 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: FredokaOne-Regular;
-    src: url(../../fonts/FredokaOne-Regular.ttf);
-}
-
 body {
     background-color: rgb(238, 238, 238);
     overflow-x: hidden;

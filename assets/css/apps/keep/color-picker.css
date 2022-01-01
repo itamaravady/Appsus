@@ -12,5 +12,11 @@
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    /* background-color: red; */
+
+}
+
+.btn-color-pick:hover {
+    cursor: pointer;
+    border: 2px solid rgb(27, 27, 27);
+    /* transform: scale(0.9); */
 }
