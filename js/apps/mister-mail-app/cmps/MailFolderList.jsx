@@ -13,8 +13,20 @@ export class MailFolderList extends React.Component {
         },
     }
 
-    componentDidMount() {
+    inboxRef = React.createRef()
+    isStarRef = React.createRef()
+    sentRef = React.createRef()
+    draftRef = React.createRef()
 
+
+    refArr = [this.inboxRef, this.isStarRef, this.sentRef, this.draftRef]
+    componentDidMount() {
+        this.inboxRef.current.classList.add('active')
+    }
+
+    toggleClassActive = (ref) => {
+        this.refArr.forEach(currRef => currRef.current.classList.remove('active'))
+        ref.current.classList.add('active')
     }
 
     changeFilter = ({ target }) => {
@@ -43,20 +55,20 @@ export class MailFolderList extends React.Component {
         return (
             <section className="folder-list">
                 <ul className="clean-list status-list">
-                    
-                    <div className={`li-img-container`}>
+
+                    <div ref={this.inboxRef} onClick={() => this.toggleClassActive(this.inboxRef)} className={`li-img-container`}>
                         <img src="assets/img/email-img/inbox.png" />
                         <NavLink className="clean-link" to="/mail" data-value="inbox" data-field="status" onClick={this.changeFilter}>Inbox</NavLink>
                     </div>
-                    <div className={`li-img-container`}>
+                    <div ref={this.isStarRef} onClick={() => this.toggleClassActive(this.isStarRef)} className={`li-img-container`}>
                         <img src="assets/img/email-img/star.png" />
-                        <NavLink  className="clean-link" to="/mail" data-value={true} data-field='isStarred' onClick={this.changeIsStarred} > Starred</NavLink>
+                        <NavLink className="clean-link" to="/mail" data-value={true} data-field='isStarred' onClick={this.changeIsStarred} > Starred</NavLink>
                     </div>
-                    <div className={`li-img-container`}>
+                    <div ref={this.sentRef} onClick={() => this.toggleClassActive(this.sentRef)} className={`li-img-container`}>
                         <img src="assets/img/email-img/sent.png" />
                         <NavLink className="clean-link" to="/mail" data-value="sent" data-field="status" onClick={this.changeFilter}>Sent Mail</NavLink>
                     </div>
-                    <div className={`li-img-container`}>
+                    <div ref={this.draftRef} onClick={() => this.toggleClassActive(this.draftRef)} className={`li-img-container`}>
                         <img src="assets/img/email-img/draft.png" />
                         <NavLink className="clean-link" to="/mail" data-value="draft" data-field="status" onClick={this.changeFilter}>Draft</NavLink>
                     </div>
