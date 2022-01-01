@@ -32,6 +32,7 @@
 .note-filter img {
     height: 100%;
     transition: 0.2s;
+    filter: invert(0%) sepia(28%) saturate(49%) hue-rotate(185deg) brightness(121%) contrast(71%);
 }
 
 .note-filter img:hover {
@@ -39,6 +40,5 @@
 }
 
 .note-filter img:active {
-    /* transform: scale(1.08); */
-    transform: rotate(359deg);
+    transform: rotate(90deg);
 }
