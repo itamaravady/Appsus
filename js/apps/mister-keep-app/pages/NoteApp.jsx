@@ -10,6 +10,7 @@ export class NoteApp extends React.Component {
     state = {
         notes: null,
         filterBy: null,
+        navClassList: '',
     }
 
     componentDidMount() {
@@ -36,7 +37,10 @@ export class NoteApp extends React.Component {
         this.setState({ filterBy }, this.loadNotes)
     }
 
-
+    onToggleNav = () => {
+        if (!this.state.navClassList) return this.setState({ navClassList: 'open-nav' })
+        return this.setState({ navClassList: '' })
+    }
 
     render() {
         const { notes } = this.state;
@@ -50,6 +54,7 @@ export class NoteApp extends React.Component {
                         loadNotes={this.loadNotes}
                         notes={notes}
                         isPinList={true}
+                        toggleScreen={this.onToggleNav}
                     />
                 }
                 {!notes ? <div></div> :
@@ -57,11 +62,11 @@ export class NoteApp extends React.Component {
                         loadNotes={this.loadNotes}
                         notes={notes}
                         isPinList={false}
+                        toggleScreen={this.onToggleNav}
                     />
                 }
 
-
-
+                <div className={`toggle-details-screen ${this.state.navClassList}`} onClick={this.onToggleNav} ></div>
 
             </section>
         )
