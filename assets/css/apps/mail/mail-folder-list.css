@@ -21,6 +21,10 @@
   width: 100%;
 }
 
+.li-img-container.active {
+  background-color: red;
+}
+
 .li-img-container:hover {
   color: rgb(68, 66, 66);
   background-color: rgb(218, 214, 214);
