@@ -24,6 +24,20 @@ export class NoteAdd extends React.Component {
 
     onChangeAddNoteType = ({ target }) => {
         this.setState({ noteType: target.name })
+        switch (target.name) {
+            case 'txt':
+                this.setState({ placeHolder: 'Type note...' })
+                break;
+            case 'img':
+                this.setState({ placeHolder: 'Insert image URL...' })
+                break;
+            case 'video':
+                this.setState({ placeHolder: 'Insert video URL...' })
+                break;
+            case 'todos':
+                this.setState({ placeHolder: 'Insert comma seperated list...' })
+                break;
+        }
     }
 
     handleChange = ({ target }) => {
