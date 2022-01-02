@@ -3,32 +3,16 @@
   margin: 0 auto;
 }
 
-@media screen and (min-width: 450px) {
-  .note-list {
-    max-width: 350px;
-  }
-}
 
-@media screen and (min-width: 650px) {
-  .note-list {
-    max-width: 600px;
-  }
-}
-
-@media screen and (min-width: 850px) {
-  .note-list {
-    max-width: 800px;
-  }
-}
 
 @media screen and (min-width: 1120px) {
-  .main-layout, .note-list {
+  .main-layout {
     max-width: 1000px;
   }
 }
 
 @media screen and (min-width: 1350px) {
-  .main-layout, .note-list {
+  .main-layout {
     max-width: 1200px;
   }
 }

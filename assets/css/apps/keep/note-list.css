@@ -1,10 +1,41 @@
 .note-list {
-    /* width: 1000px; */
-    column-width: 220px;
-    column-count: auto;
+
     column-gap: 15px;
     height: 100%;
     margin: 0 auto;
     margin-bottom: 50px;
+    max-width: 400px;
+    column-count: 2;
+}
 
+
+@media screen and (min-width: 550px) {
+    .note-list {}
+}
+
+@media screen and (min-width: 650px) {
+    .note-list {
+        max-width: 600px;
+        column-width: 220px;
+        column-count: auto;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    .note-list {
+        max-width: 800px;
+        column-count: 4;
+    }
+}
+
+@media screen and (min-width: 1120px) {
+    .note-list {
+        max-width: 1000px;
+    }
+}
+
+@media screen and (min-width: 1350px) {
+    .note-list {
+        max-width: 1200px;
+    }
 }
